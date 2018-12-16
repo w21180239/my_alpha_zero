@@ -1,12 +1,12 @@
 import enum
 from logging import getLogger
 
-from reversi_zero.agent.player_serial import HistoryItem
-from reversi_zero.agent.player_serial import ReversiPlayer
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import Player, ReversiEnv
-from reversi_zero.lib.bitboard import find_correct_moves
-from reversi_zero.play_game.common import load_model
+from ..agent.player_serial import HistoryItem
+from ..agent.player_serial import ReversiPlayer
+from ..config import Config
+from ..env.reversi_env import Player, ReversiEnv
+from ..lib.bitboard import find_correct_moves
+from ..play_game.common import load_model
 
 logger = getLogger(__name__)
 

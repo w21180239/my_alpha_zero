@@ -3,7 +3,7 @@ import os
 from glob import glob
 from logging import getLogger
 
-from reversi_zero.config import ResourceConfig
+from ..config import ResourceConfig
 
 logger = getLogger(__name__)
 

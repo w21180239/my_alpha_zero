@@ -5,9 +5,9 @@ from logging import getLogger
 import wx
 from wx.core import CommandEvent
 
-from reversi_zero.config import Config, GuiConfig, PlayWithHumanConfig
-from reversi_zero.env.reversi_env import Player
-from reversi_zero.play_game.game_model import PlayWithHuman, GameEvent
+from ..config import Config, GuiConfig
+from ..env.reversi_env import Player
+from ..play_game.game_model import PlayWithHuman, GameEvent
 
 logger = getLogger(__name__)
 

@@ -2,9 +2,9 @@ import hashlib
 import json
 import os
 from logging import getLogger
+
 # noinspection PyPep8Naming
 import keras.backend as K
-
 from keras.engine.topology import Input
 from keras.engine.training import Model
 from keras.layers.convolutional import Conv2D
@@ -15,7 +15,7 @@ from keras.losses import mean_squared_error
 from keras.regularizers import l2
 from keras.utils.vis_utils import plot_model
 
-from reversi_zero.config import Config
+from ..config import Config
 
 logger = getLogger(__name__)
 

@@ -6,10 +6,11 @@ from logging import getLogger
 
 import numpy as np
 from numpy.random import random
-from reversi_zero.agent.api import ReversiModelAPI
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import ReversiEnv, Player, Winner, another_player
-from reversi_zero.lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
+
+from ..agent.api import ReversiModelAPI
+from ..config import Config
+from ..env.reversi_env import ReversiEnv, Player, Winner, another_player
+from ..lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
 
 CounterKey = namedtuple("CounterKey", "black white next_player")
 QueueItem = namedtuple("QueueItem", "state future")

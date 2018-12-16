@@ -1,26 +1,24 @@
-import cProfile
 import os
 from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
 from logging import getLogger
+from multiprocessing import Manager
 from random import random
 from time import time
 from traceback import print_stack
 
 import numpy as np
-from multiprocessing import Manager, Lock
 
-
-from reversi_zero.agent.api import MultiProcessReversiModelAPIServer
-from reversi_zero.agent.player import ReversiPlayer
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import Board, Winner
-from reversi_zero.env.reversi_env import ReversiEnv, Player
-from reversi_zero.lib import tf_util
-from reversi_zero.lib.data_helper import get_game_data_filenames, write_game_data_to_file
-from reversi_zero.lib.file_util import read_as_int
-from reversi_zero.lib.ggf import convert_action_to_move, make_ggf_string
-from reversi_zero.lib.tensorboard_logger import TensorBoardLogger
+from ..agent.api import MultiProcessReversiModelAPIServer
+from ..agent.player_serial import ReversiPlayer
+from ..config import Config
+from ..env.reversi_env import Board, Winner
+from ..env.reversi_env import ReversiEnv, Player
+from ..lib import tf_util
+from ..lib.data_helper import get_game_data_filenames, write_game_data_to_file
+from ..lib.file_util import read_as_int
+from ..lib.ggf import convert_action_to_move, make_ggf_string
+from ..lib.tensorboard_logger import TensorBoardLogger
 
 logger = getLogger(__name__)
 
