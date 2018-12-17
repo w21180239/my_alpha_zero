@@ -1,6 +1,5 @@
 import asyncio
 import time
-from _asyncio import Future
 from asyncio.queues import Queue
 from collections import defaultdict, namedtuple
 from logging import getLogger
@@ -14,9 +13,7 @@ from ..env.reversi_env import ReversiEnv, Player, Winner, another_player
 from ..lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
 
 CounterKey = namedtuple("CounterKey", "black white next_player")
-QueueItem = namedtuple("QueueItem", "state future")
 HistoryItem = namedtuple("HistoryItem", "action policy values visit enemy_values enemy_visit")
-CallbackInMCTS = namedtuple("CallbackInMCTS", "per_sim callback")
 MCTSInfo = namedtuple("MCTSInfo", "var_n var_w var_p")
 ActionWithEvaluation = namedtuple("ActionWithEvaluation", "action n q")
 
@@ -25,20 +22,12 @@ logger = getLogger(__name__)
 
 class ReversiPlayer:
     def __init__(self, config: Config, model, play_config=None, enable_resign=True, mtcs_info=None, api=None):
-        """
-
-        :param config:
-        :param reversi_zero.agent.model.ReversiModel|None model:
-        :param MCTSInfo mtcs_info:
-        :parameter ReversiModelAPI api:
-        """
         self.config = config
         self.model = model
         self.play_config = play_config or self.config.play
         self.enable_resign = enable_resign
         self.api = api or ReversiModelAPI(self.config, self.model)
 
-        # key=(own, enemy, action)
         mtcs_info = mtcs_info or self.create_mtcs_info()
         self.var_n, self.var_w, self.var_p = mtcs_info
 
@@ -52,7 +41,7 @@ class ReversiPlayer:
         self.running_simulation_num = 0
         self.callback_in_mtcs = None
 
-        self.thinking_history = {}  # for fun
+        self.thinking_history = {}
         self.resigned = False
         self.requested_stop_thinking = False
 
@@ -63,55 +52,54 @@ class ReversiPlayer:
                         defaultdict(lambda: np.zeros((64,))))
 
     def var_q(self, key):
-        return self.var_w[key] / (self.var_n[key] + 1e-5)
+        return self.var_w[key] / (self.var_n[key] + 1e-5)  # 防止除零
 
     def action(self, own, enemy, callback_in_mtcs=None):
         action_with_eval = self.action_with_evaluation(own, enemy, callback_in_mtcs=callback_in_mtcs)
         return action_with_eval.action
 
-    def action_with_evaluation(self, own, enemy, callback_in_mtcs=None):
-        env = ReversiEnv().update(own, enemy, Player.black)
-        key = self.counter_key(env)
+    def action_with_evaluation(self, me, enemy, callback_in_mtcs=None):
+        game = ReversiEnv().update(me, enemy, Player.black)
+        key = self.counter_key(game)
         self.callback_in_mtcs = callback_in_mtcs
         pc = self.play_config
 
-        if pc.use_solver_turn and env.turn >= pc.use_solver_turn:
-            ret = self.action_by_searching(key)
-            if ret:  # not save move as play data
-                return ret
+        # 计时
         start = time.time()
         original_expanded_size = len(self.expanded)
         for tl in range(self.play_config.thinking_loop):
-            if env.turn > 0:
-                self.search_moves(own, enemy, start, original_expanded_size)
+            if game.turn > 0:
+                self.search_moves(me, enemy, start, original_expanded_size)
             else:
                 self.bypass_first_move(key)
             # logger.debug(f'Expanded node list size:{len(self.expanded)}')
-            policy = self.calc_policy(own, enemy)
-            action = int(np.random.choice(range(64), p=policy))
-            action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0) * 100))
+            policy = self.calc_policy(me, enemy)
+            action = int(np.random.choice(range(64), p=policy))  # 过去走的最多的路：蕴含了NN算出来的信息
+            action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0) * 100))  # 胜率最高的路
             value_diff = self.var_q(key)[action] - self.var_q(key)[action_by_value]
-
-            if env.turn <= pc.start_rethinking_turn or self.requested_stop_thinking or \
+            # 如果不一样且还有时间，再次思考
+            if game.turn <= pc.start_rethinking_turn or self.requested_stop_thinking or \
                     (value_diff > -0.01 and self.var_n[key][action] >= pc.required_visit_to_decide_action) or \
                     time.time() - start > self.config.play.max_search_time:
                 break
+        print(f'Total time:{time.time()-start}')
 
-        # this is for play_gui, not necessary when training.
-        self.update_thinking_history(own, enemy, action, policy)
-
+        # 训练的时候可以不用
+        self.update_thinking_history(me, enemy, action, policy)
+        # 步数过多时提前结束
         if self.play_config.resign_threshold is not None and \
                 np.max(self.var_q(key) - (self.var_n[key] == 0) * 10) <= self.play_config.resign_threshold:
             self.resigned = True
             if self.enable_resign:
-                if env.turn >= self.config.play.allowed_resign_turn:
+                if game.turn >= self.config.play.allowed_resign_turn:
                     return ActionWithEvaluation(None, 0, 0)  # means resign
                 else:
                     logger.debug(
-                        f"Want to resign but disallowed turn {env.turn} < {self.config.play.allowed_resign_turn}")
+                        f"Want to resign but disallowed turn {game.turn} < {self.config.play.allowed_resign_turn}")
 
         saved_policy = self.calc_policy_by_tau_1(key) if self.config.play_data.save_policy_of_tau_1 else policy
-        self.add_data_to_move_buffer_with_8_symmetries(own, enemy, saved_policy)
+        # 将棋局拷贝成8个对称方向，增大数据量
+        self.store_data_with_8_symmetries(me, enemy, saved_policy)
         return ActionWithEvaluation(action=action, n=self.var_n[key][action], q=self.var_q(key)[action])
 
     def update_thinking_history(self, black, white, action, policy):
@@ -121,30 +109,17 @@ class ReversiPlayer:
             HistoryItem(action, policy, list(self.var_q(key)), list(self.var_n[key]),
                         list(self.var_q(next_key)), list(self.var_n[next_key]))
 
-    def bypass_first_move(self, key):
+    def bypass_first_move(self, key):  # 先手第一步随便下
         legal_array = bit_to_array(find_correct_moves(key.black, key.white), 64)
         action = np.argmax(legal_array)
         self.var_n[key][action] = 1
         self.var_w[key][action] = 0
         self.var_p[key] = legal_array / np.sum(legal_array)
 
-    def action_by_searching(self, key):
-        action, score = self.solver.solve(key.black, key.white, Player(key.next_player), exactly=True)
-        if action is None:
-            return None
-        # logger.debug(f"action_by_searching: score={score}")
-        policy = np.zeros(64)
-        policy[action] = 1
-        self.var_n[key][action] = 999
-        self.var_w[key][action] = np.sign(score) * 999
-        self.var_p[key] = policy
-        self.update_thinking_history(key.black, key.white, action, policy)
-        return ActionWithEvaluation(action=action, n=999, q=np.sign(score))
-
     def stop_thinking(self):
         self.requested_stop_thinking = True
 
-    def add_data_to_move_buffer_with_8_symmetries(self, own, enemy, policy):
+    def store_data_with_8_symmetries(self, own, enemy, policy):
         for flip in [False, True]:
             for rot_right in range(4):
                 own_saved, enemy_saved, policy_saved = own, enemy, policy.reshape((8, 8))
@@ -164,28 +139,25 @@ class ReversiPlayer:
         env.step(action)
         return self.counter_key(env)
 
-    def ask_thought_about(self, own, enemy) -> HistoryItem:
+    def ask_thought_about(self, own, enemy):
         return self.thinking_history.get((own, enemy))
 
     def search_moves(self, own, enemy, start_time, original_expanded_size):
-        self.running_simulation_num = 0
+        '''最外层搜索函数'''
         self.requested_stop_thinking = False
         for i in range(self.config.play.simulation_num_per_move):
             self.start_search_my_move(own, enemy)
             if time.time() - start_time > self.config.play.max_search_time:
                 logger.debug(f'Time out!\tTotal searched nodes:{len(self.expanded)-original_expanded_size}')
                 break
-        # self.prediction_worker()
 
     def start_search_my_move(self, own, enemy):
-        self.running_simulation_num += 1
+        '''一次MCTS搜索'''
         root_key = self.counter_key(ReversiEnv().update(own, enemy, Player.black))
         if self.requested_stop_thinking:
-            self.running_simulation_num -= 1
             return None
         env = ReversiEnv().update(own, enemy, Player.black)
         leaf_v = self.search_my_move(env, is_root_node=True)
-        self.running_simulation_num -= 1
         if self.callback_in_mtcs and self.callback_in_mtcs.per_sim > 0 and \
                 self.running_simulation_num % self.callback_in_mtcs.per_sim == 0:
             self.callback_in_mtcs.callback(list(self.var_q(root_key)), list(self.var_n[root_key]))
@@ -193,12 +165,8 @@ class ReversiPlayer:
 
     def search_my_move(self, env: ReversiEnv, is_root_node=False):
         """
-
-        Q, V is value for this Player(always black).
-        P is value for the player of next_player (black or white)
-        :param env:
-        :param is_root_node:
-        :return:
+        Q, V 是对黑方的
+        P 是对要下棋的一方的
         """
         if env.done:  # 打完了
             if env.winner == Winner.black:
@@ -211,70 +179,34 @@ class ReversiPlayer:
         key = self.counter_key(env)
         another_side_key = self.another_side_counter_key(env)
 
-        # if self.config.play.use_solver_turn_in_simulation and \
-        #         env.turn >= self.config.play.use_solver_turn_in_simulation:
-        #     action, score = self.solver.solve(key.black, key.white, Player(key.next_player), exactly=False)
-        #     if action:
-        #         score = score if env.next_player == Player.black else -score
-        #         leaf_v = np.sign(score)     #得分
-        #         leaf_p = np.zeros(64)       #policy
-        #         leaf_p[action] = 1
-        #         self.var_n[key][action] += 1    #走的次数
-        #         self.var_w[key][action] += leaf_v   #得分
-        #         self.var_p[key] = leaf_p        #policy
-        #         self.var_n[another_side_key][action] += 1
-        #         self.var_w[another_side_key][action] -= leaf_v
-        #         self.var_p[another_side_key] = leaf_p
-        #         return np.sign(score)
-        # 等待所有线程搜索完毕
-        # 正在探索的节点
-        # 是叶子节点的话探索并评价
-
-        if key not in self.expanded:  # reach leaf node
+        if key not in self.expanded:  # 到达leaf
             leaf_v = self.expand_and_evaluate(env)
             if env.next_player == Player.black:
                 return leaf_v  # Value for black
             else:
                 return -leaf_v  # Value for white == -Value for black
         # 当前节点不是leaf
-        # virtual_loss = self.config.play.virtual_loss
-        # virtual_loss_for_w = virtual_loss if env.next_player == Player.black else -virtual_loss
-
         action_t = self.select_action_q_and_u(env, is_root_node)
         _, _ = env.step(action_t)
 
-        # self.var_n[key][action_t] += virtual_loss
-        # self.var_w[key][action_t] -= virtual_loss_for_w
         leaf_v = self.search_my_move(env)  # next move
 
-        # on returning search path
-        # update: N, W
-        # self.var_n[key][action_t] += - virtual_loss + 1
-        # self.var_w[key][action_t] += virtual_loss_for_w + leaf_v
+        # 递归的更新N和W
         self.var_n[key][action_t] += 1
         self.var_w[key][action_t] += leaf_v
-        # update another side info(flip color and player)
+        # 对面的也要更新
         self.var_n[another_side_key][action_t] += 1
         self.var_w[another_side_key][action_t] -= leaf_v  # must flip the sign.
         return leaf_v
 
     def expand_and_evaluate(self, env):
-        """expand new leaf
-
-        update var_p, return leaf_v
-
-        :param ReversiEnv env:
-        :return: leaf_v
-        """
-
+        """扩展并评价leaf"""
         key = self.counter_key(env)
         another_side_key = self.another_side_counter_key(env)
         self.now_expanding.add(key)
 
         black, white = env.board.black, env.board.white
 
-        # (di(p), v) = fθ(di(sL))
-        # rotation and flip. flip -> rot.
         is_flip_vertical = random() < 0.5
         rotate_right_num = int(random() * 4)
         if is_flip_vertical:
@@ -285,10 +217,9 @@ class ReversiPlayer:
         black_ary = bit_to_array(black, 64).reshape((8, 8))
         white_ary = bit_to_array(white, 64).reshape((8, 8))
         state = [black_ary, white_ary] if env.next_player == Player.black else [white_ary, black_ary]
-        future = self.predict(np.array(state))  # type: Future
-        leaf_p, leaf_v = future[0], future[1]  # 都是NN算出来的
+        result = self.predict(np.array(state))
+        leaf_p, leaf_v = result[0], result[1]  # 都是NN算出来的
 
-        # reverse rotate and flip about leaf_p
         if rotate_right_num > 0 or is_flip_vertical:  # reverse rotation and flip. rot -> flip.
             leaf_p = leaf_p.reshape((8, 8))
             if rotate_right_num > 0:
@@ -297,7 +228,7 @@ class ReversiPlayer:
                 leaf_p = np.flipud(leaf_p)
             leaf_p = leaf_p.reshape((64,))
 
-        self.var_p[key] = leaf_p  # P is policy
+        self.var_p[key] = leaf_p
         self.var_p[another_side_key] = leaf_p
         self.expanded.add(key)
         self.now_expanding.remove(key)
@@ -307,21 +238,11 @@ class ReversiPlayer:
         return self.api.predict(x)
 
     def finish_game(self, z):
-        """
-
-        :param z: win=1, lose=-1, draw=0
-        :return:
-        """
-        for move in self.moves:  # add this game winner result to all past moves.
+        for move in self.moves:  # 对所有路上的节点更新
             move += [z]
 
     def calc_policy(self, own, enemy):
-        """calc π(a|s0)
-
-        :param own:
-        :param enemy:
-        :return:
-        """
+        """计算 π(a|s0)"""
         pc = self.play_config
         env = ReversiEnv().update(own, enemy, Player.black)
         key = self.counter_key(env)
@@ -336,46 +257,33 @@ class ReversiPlayer:
     def calc_policy_by_tau_1(self, key):
         return self.var_n[key] / np.sum(self.var_n[key])  # tau = 1
 
-    @staticmethod
-    def counter_key(env: ReversiEnv):
-        return CounterKey(env.board.black, env.board.white, env.next_player.value)
-
-    @staticmethod
-    def another_side_counter_key(env: ReversiEnv):
-        return CounterKey(env.board.white, env.board.black, another_player(env.next_player).value)
-
     def select_action_q_and_u(self, env, is_root_node):
         key = self.counter_key(env)
         if env.next_player == Player.black:
             legal_moves = find_correct_moves(key.black, key.white)
         else:
             legal_moves = find_correct_moves(key.white, key.black)
-        # noinspection PyUnresolvedReferences
-        xx_ = np.sqrt(np.sum(self.var_n[key]))  # SQRT of sum(N(s, b); for all b)
-        xx_ = max(xx_, 1)  # avoid u_=0 if N is all 0
+        xx_ = np.sqrt(np.sum(self.var_n[key]))
+        xx_ = max(xx_, 1)  # 避免为0
         p_ = self.var_p[key]
 
-        # re-normalize in legal moves
+        # 归一化
         p_ = p_ * bit_to_array(legal_moves, 64)
         if np.sum(p_) > 0:
-            # decay policy gradually in the end phase
             _pc = self.config.play
             temperature = min(np.exp(1 - np.power(env.turn / _pc.policy_decay_turn, _pc.policy_decay_power)), 1)
-            # normalize and decay policy
             p_ = self.normalize(p_, temperature)
 
-        if is_root_node and self.play_config.noise_eps > 0:  # Is it correct?? -> (1-e)p + e*Dir(alpha)
+        if is_root_node and self.play_config.noise_eps > 0:
             noise = dirichlet_noise_of_mask(legal_moves, self.play_config.dirichlet_alpha)
             p_ = (1 - self.play_config.noise_eps) * p_ + self.play_config.noise_eps * noise
 
-        u_ = self.play_config.c_puct * p_ * xx_ / (1 + self.var_n[key])
+        u_ = self.play_config.c_puct * p_ * xx_ / (1 + self.var_n[key])  # 根据alpha zero的公式
         if env.next_player == Player.black:
             v_ = (self.var_q(key) + u_ + 1000) * bit_to_array(legal_moves, 64)
         else:
-            # When enemy's selecting action, flip Q-Value.
             v_ = (-self.var_q(key) + u_ + 1000) * bit_to_array(legal_moves, 64)
 
-        # noinspection PyTypeChecker
         action_t = int(np.argmax(v_))
         return action_t
 
@@ -384,5 +292,10 @@ class ReversiPlayer:
         pp = np.power(p, t)
         return pp / np.sum(pp)
 
-    def create_solver(self):
-        return ReversiSolver()
+    @staticmethod
+    def counter_key(env: ReversiEnv):
+        return CounterKey(env.board.black, env.board.white, env.next_player.value)
+
+    @staticmethod
+    def another_side_counter_key(env: ReversiEnv):
+        return CounterKey(env.board.white, env.board.black, another_player(env.next_player).value)

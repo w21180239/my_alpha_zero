@@ -1,4 +1,5 @@
 import asyncio
+import time
 from _asyncio import Future
 from asyncio.queues import Queue
 from collections import defaultdict, namedtuple
@@ -54,7 +55,7 @@ class ReversiPlayer:
         self.thinking_history = {}  # for fun
         self.resigned = False
         self.requested_stop_thinking = False
-        self.solver = self.create_solver()
+        # self.solver = self.create_solver()
 
     @staticmethod
     def create_mtcs_info():
@@ -98,7 +99,7 @@ class ReversiPlayer:
             ret = self.action_by_searching(key)
             if ret:  # not save move as play data
                 return ret
-
+        start = time.time()
         for tl in range(self.play_config.thinking_loop):
             if env.turn > 0:
                 self.search_moves(own, enemy)
@@ -113,6 +114,7 @@ class ReversiPlayer:
             if env.turn <= pc.start_rethinking_turn or self.requested_stop_thinking or \
                     (value_diff > -0.01 and self.var_n[key][action] >= pc.required_visit_to_decide_action):
                 break
+        print(f'Total time:{time.time()-start}')
 
         # this is for play_gui, not necessary when training.
         self.update_thinking_history(own, enemy, action, policy)
