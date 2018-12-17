@@ -1,6 +1,5 @@
 import asyncio
 import time
-from asyncio.queues import Queue
 from collections import defaultdict, namedtuple
 from logging import getLogger
 
@@ -33,8 +32,6 @@ class ReversiPlayer:
 
         self.expanded = set(self.var_p.keys())
         self.now_expanding = set()
-        self.prediction_queue = Queue(self.play_config.prediction_queue_size)
-        self.sem = asyncio.Semaphore(self.play_config.parallel_search_num)
 
         self.moves = []
         self.loop = asyncio.get_event_loop()
