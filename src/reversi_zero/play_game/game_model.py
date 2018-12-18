@@ -20,9 +20,9 @@ class PlayWithHuman:
         self.observers = []
         self.env = ReversiEnv().reset()
         self.model = self._load_model()
-        self.ai = None  # type: ReversiPlayer
+        self.ai = None
         self.last_evaluation = None
-        self.last_history = None  # type: HistoryItem
+        self.last_history = None
 
     def add_observer(self, observer_func):
         self.observers.append(observer_func)
@@ -55,7 +55,6 @@ class PlayWithHuman:
         return self.env.next_player
 
     def stone(self, px, py):
-        """left top=(0, 0), right bottom=(7,7)"""
         pos = int(py * 8 + px)
         assert 0 <= pos < 64
         bit = 1 << pos
@@ -101,7 +100,7 @@ class PlayWithHuman:
 
         self.last_history = self.ai.ask_thought_about(own, enemy)
         self.last_evaluation = self.last_history.values[self.last_history.action]
-        # logger.debug(f"evaluation by ai={self.last_evaluation}")
+
 
     def get_state_of_next_player(self):
         if self.next_player == Player.black:

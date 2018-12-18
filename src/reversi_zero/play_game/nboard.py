@@ -36,8 +36,8 @@ class NBoardEngine:
         self.reader = NonBlockingStreamReader(sys.stdin)
         self.handler = NBoardProtocolVersion2(config, self)
         self.running = False
-        self.nc = self.config.nboard  # shorcut
-        #
+        self.nc = self.config.nboard
+
         self.env = ReversiEnv().reset()
         self.model = load_model(self.config)
         self.play_config = self.config.play
@@ -60,8 +60,8 @@ class NBoardEngine:
             self.handler.handle_message(message)
 
     def push_callback(self, message: str):
-        # note: called in another thread
-        if message.startswith("ping"):  # interupt
+
+        if message.startswith("ping"):
             self.stop_thinkng()
 
     def stop(self):
@@ -78,7 +78,6 @@ class NBoardEngine:
     def set_depth(self, n):
         try:
             n = int(n)
-            # self.play_config.simulation_num_per_move = n * self.nc.simulation_num_per_depth_about
             self.play_config.required_visit_to_decide_action = n * self.nc.simulation_num_per_depth_about
             self.play_config.thinking_loop = min(
                 30,
@@ -127,10 +126,7 @@ class NBoardEngine:
         return GoResponse(action, evaluation, time_took)
 
     def hint(self, n_hint):
-        """
 
-        :param n_hint:
-        """
         board = self.env.board
         if self.env.next_player == Player.black:
             states = (board.black, board.white)
@@ -186,107 +182,40 @@ class NBoardProtocolVersion2:
         self.tell_status("waiting")
 
     def set_depth(self, depth):
-        """Set engine midgame search depth.
 
-        Optional: Set midgame depth to {maxDepth}. Endgame depths are at the engine author's discretion.
-        :param depth:
-        """
         self.engine.set_depth(depth)
 
     def set_game(self, ggf_str):
-        """Tell the engine that all further commands relate to the position at the end of the given game, in GGF format.
 
-        Required:The engine must update its stored game state.
-        :param ggf_str: see https://skatgame.net/mburo/ggsa/ggf . important info are BO, B+, W+
-        """
         ggf = parse_ggf(ggf_str)
         black, white, actions = convert_to_bitboard_and_actions(ggf)
         player = Player.black if ggf.BO.color == "*" else Player.white
         self.engine.set_game(GameState(black, white, actions, player))
 
-        # if set_game at turn=1~2 is sent, reset engine state.
+
         if len(actions) <= 1:
-            self.engine.reset_state()  # clear MCTS cache
+            self.engine.reset_state()
 
     def move(self, move, evaluation, time_sec):
-        """Tell the engine that all further commands relate to the position after the given move.
-        The move is 2 characters e.g. "F5". Eval is normally in centi-disks. Time is in seconds.
-        Eval and time may be omitted. If eval is omitted it is assumed to be "unknown";
-        if time is omitted it is assumed to be 0.
 
-        Required:Update the game state by making the move. No response required.
-        """
-        # logger.debug(f"[{move}] [{evaluation}] [{time_sec}]")
+
 
         action = convert_move_to_action(move)
         self.engine.move(action)
 
     def hint(self, n):
-        """Tell the engine to give evaluations for the given position. n tells how many moves to evaluate,
-        e.g. 2 means give evaluations for the top 2 positions. This is used when the user is analyzing a game.
-        With the "hint" command the engine is not CONSTRained by the time remaining in the game.
 
-        Required: The engine sends back an evaluation for at its top move
-
-        Best: The engine sends back an evaluation for approximately the top n moves.
-        If the engine searches using iterative deepening it should also send back evaluations during search,
-        which makes the GUI feel more responsive to the user.
-
-        Depending on whether the evalation came from book or a search, the engine sends back
-
-        search {pv: PV} {eval:Eval} 0 {depth:Depth} {freeform text}
-        or
-        book {pv: PV} {eval:Eval} {# games:long} {depth:Depth} {freeform text:string}
-
-        PV: The pv must begin with two characters representing the move considered (e.g. "F5" or "PA") and
-        must not contain any whitespace. "F5d6C3" and "F5-D6-C3" are valid PVs but "F5 D6 C3" will
-        consider D6 to be the eval.
-
-        Eval: The eval is from the point-of-view of the player to move and is a double.
-        At the engine's option it can also be an ordered pair of doubles separated by a comma:
-        {draw-to-black value}, {draw-to-white value}.
-
-        Depth: depth is the search depth. It must start with an integer but can end with other characters;
-        for instance "100%W" is a valid depth. The depth cannot contain spaces.
-
-        Two depth codes have special meaning to NBoard: "100%W" tells NBoard that the engine has solved
-        for a win/loss/draw and the sign of the eval matches the sign of the returned eval.
-        "100%" tells NBoard that the engine has done an exact solve.
-        The freeform text can be any other information that the engine wants to convey.
-        NBoard 1.1 and 2.0 do not display this information but later versions or other GUIs may.
-
-        :param n:
-        """
         self.tell_status("thinkng hint...")
         self.engine.hint(int(n))
         self.tell_status("waiting")
 
     def report_hint(self, hint_list):
-        for hint in reversed(hint_list):  # there is a rule that the last is best?
+        for hint in reversed(hint_list):
             move = convert_action_to_move(hint.action)
             self.engine.reply(f"search {move} {hint.value} 0 {int(hint.visit)}")
 
     def go(self):
-        """Tell the engine to decide what move it would play.
 
-        This is used when the engine is playing in a game.
-        With the "go" command the computer is limited by both the maximum search depth and
-        the time remaining in the game.
-
-        Required: The engine responds with "=== {move}" where move is e.g. "F5"
-
-        Best: The engine responds with "=== {move:String}/{eval:float}/{time:float}".
-        Eval may be omitted if the move is forced. The engine also sends back thinking output
-        as in the "hint" command.
-
-        Important: The engine does not update the board with this move,
-        instead it waits for a "move" command from NBoard.
-        This is because the user may have modified the board while the engine was thinking.
-
-        Note: To make it easier for the engine author,
-        The NBoard gui sets the engine's status to "" when it receives the response.
-        The engine can override this behaviour by sending a "status" command immediately after the response.
-        """
         self.tell_status("thinking...")
         gr = self.engine.go()
         move = convert_action_to_move(gr.action)
@@ -294,38 +223,16 @@ class NBoardProtocolVersion2:
         self.tell_status("waiting")
 
     def ping(self, n):
-        """Ensure synchronization when the board position is about to change.
 
-        Required: Stop thinking and respond with "pong n".
-        If the engine is analyzing a position it must stop analyzing before sending "pong n"
-        otherwise NBoard will think the analysis relates to the current position.
-        :param n:
-        :return:
-        """
-        # self.engine.stop_thinkng()  # not implemented
+
         self.engine.reply(f"pong {n}")
 
     def learn(self):
-        """Learn the current game.
-        Required: Respond "learned".
 
-        Best: Add the current game to book.
-
-        Note: To make it easier for the engine author,
-        The NBoard gui sets the engine's status to "" when it receives the "learned" response.
-        The engine can override this behaviour by sending a "status" command immediately after the response.
-        """
         self.engine.reply("learned")
 
     def analyze(self):
-        """Perform a retrograde analysis of the current game.
 
-        Optional: Perform a retrograde analysis of the current game.
-        For each board position occurring in the game,
-        the engine sends back a line of the form analysis {movesMade:int} {eval:double}.
-        movesMade = 0 corresponds to the start position. Passes count towards movesMade,
-        so movesMade can go above 60.
-        """
         pass
 
     def tell_status(self, status):

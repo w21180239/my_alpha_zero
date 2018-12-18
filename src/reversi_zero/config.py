@@ -80,11 +80,7 @@ class PlayWithHumanConfig(ConfigBase):
         self.use_newest_next_generation_model = True
 
     def update_play_config(self, pc):
-        """
 
-        :param PlayConfig pc:
-        :return:
-        """
         pc.noise_eps = self.noise_eps
         pc.change_tau_turn = self.change_tau_turn
         pc.parallel_search_num = self.parallel_search_num
@@ -102,7 +98,7 @@ class NBoardConfig(ConfigBase):
 
 class EvaluateConfig(ConfigBase):
     def __init__(self):
-        self.game_num = 200  # 400
+        self.game_num = 200
         self.replace_rate = 0.55
         self.play_config = PlayConfig()
         self.play_config.simulation_num_per_move = 400
@@ -115,7 +111,7 @@ class EvaluateConfig(ConfigBase):
 
 class PlayDataConfig(ConfigBase):
     def __init__(self):
-        # Max Training Data Size = nb_game_in_file * max_file_num * 8
+
         self.multi_process_num = 16
         self.nb_game_in_file = 2
         self.max_file_num = 800
@@ -147,37 +143,36 @@ class PlayConfig(ConfigBase):
         self.disable_resignation_rate = 0.1
         self.false_positive_threshold = 0.05
         self.resign_threshold_delta = 0.01
-        self.policy_decay_turn = 60  # not used
+        self.policy_decay_turn = 60
         self.policy_decay_power = 3
         self.max_search_time = 100
 
-        # Using a solver is a kind of cheating!
+
         self.use_solver_turn = 0
         self.use_solver_turn_in_simulation = 50
 
-        #
+
         self.schedule_of_simulation_num_per_move = [
             (0, 8),
             (300, 50),
             (2000, 200),
         ]
 
-        # True means evaluating 'AlphaZero' method (disable 'eval' worker).
-        # Please change to False if you want to evaluate 'AlphaGo Zero' method.
+
         self.use_newest_next_generation_model = True
 
 
 class TrainerConfig(ConfigBase):
     def __init__(self):
-        self.wait_after_save_model_ratio = 1  # wait after saving model
-        self.batch_size = 256  # 2048
+        self.wait_after_save_model_ratio = 1
+        self.batch_size = 256
         self.min_data_size_to_learn = 100000
         self.epoch_to_checkpoint = 1
         self.start_total_steps = 0
         self.save_model_steps = 200
         self.use_tensorboard = True
         self.logging_per_steps = 100
-        self.delete_self_play_after_number_of_training = 0  # control ratio of train:self data.
+        self.delete_self_play_after_number_of_training = 0
         self.lr_schedules = [
             (0, 0.01),
             (150000, 0.001),
