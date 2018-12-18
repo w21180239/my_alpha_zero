@@ -1,18 +1,15 @@
-import numpy as np
-
+from logging import getLogger
 from multiprocessing import Pipe, connection
 from threading import Thread
 from time import time
 
-from logging import getLogger
-
-from reversi_zero.agent.model import ReversiModel
-from reversi_zero.config import Config
-
-from reversi_zero.lib.model_helpler import reload_newest_next_generation_model_if_changed, load_best_model_weight, \
-    save_as_best_model, reload_best_model_weight_if_changed
+import numpy as np
 import tensorflow as tf
 
+from ..agent.model import ReversiModel
+from ..config import Config
+from ..lib.model_helpler import reload_newest_next_generation_model_if_changed, load_best_model_weight, \
+    save_as_best_model, reload_best_model_weight_if_changed
 
 logger = getLogger(__name__)
 

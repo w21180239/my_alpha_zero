@@ -9,15 +9,15 @@ import numpy as np
 from keras.callbacks import Callback
 from keras.optimizers import SGD
 
-from reversi_zero.agent.model import ReversiModel, objective_function_for_policy, \
+from ..agent.model import ReversiModel, objective_function_for_policy, \
     objective_function_for_value
-from reversi_zero.config import Config
-from reversi_zero.lib import tf_util
-from reversi_zero.lib.bitboard import bit_to_array
-from reversi_zero.lib.data_helper import get_game_data_filenames, read_game_data_from_file, \
+from ..config import Config
+from ..lib import tf_util
+from ..lib.bitboard import bit_to_array
+from ..lib.data_helper import get_game_data_filenames, read_game_data_from_file, \
     get_next_generation_model_dirs
-from reversi_zero.lib.model_helpler import load_best_model_weight
-from reversi_zero.lib.tensorboard_step_callback import TensorBoardStepCallback
+from ..lib.model_helpler import load_best_model_weight
+from ..lib.tensorboard_step_callback import TensorBoardStepCallback
 
 logger = getLogger(__name__)
 
@@ -145,7 +145,7 @@ class OptimizeWorker:
         return len(self.dataset[0])
 
     def load_model(self):
-        from reversi_zero.agent.model import ReversiModel
+        from ..agent.model import ReversiModel
         model = ReversiModel(self.config)
         rc = self.config.resource
 

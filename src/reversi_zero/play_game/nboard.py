@@ -1,17 +1,16 @@
 import re
 import sys
 from collections import namedtuple
-
 from logging import getLogger, StreamHandler, FileHandler
 from time import time
 
-from reversi_zero.agent.player import ReversiPlayer, CallbackInMCTS
-from reversi_zero.config import Config, PlayWithHumanConfig
-from reversi_zero.env.reversi_env import ReversiEnv, Player
-from reversi_zero.lib.ggf import parse_ggf, convert_to_bitboard_and_actions, convert_move_to_action, \
+from ..agent.player_serial import ReversiPlayer, CallbackInMCTS
+from ..config import Config
+from ..env.reversi_env import ReversiEnv, Player
+from ..lib.ggf import parse_ggf, convert_to_bitboard_and_actions, convert_move_to_action, \
     convert_action_to_move
-from reversi_zero.lib.nonblocking_stream_reader import NonBlockingStreamReader
-from reversi_zero.play_game.common import load_model
+from ..lib.nonblocking_stream_reader import NonBlockingStreamReader
+from ..play_game.common import load_model
 
 logger = getLogger(__name__)
 

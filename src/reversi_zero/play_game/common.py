@@ -1,5 +1,5 @@
-from reversi_zero.config import Config
-from reversi_zero.lib.model_helpler import reload_newest_next_generation_model_if_changed, load_best_model_weight
+from ..config import Config
+from ..lib.model_helpler import reload_newest_next_generation_model_if_changed, load_best_model_weight
 
 
 def load_model(config: Config):

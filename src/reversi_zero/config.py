@@ -149,9 +149,10 @@ class PlayConfig(ConfigBase):
         self.resign_threshold_delta = 0.01
         self.policy_decay_turn = 60  # not used
         self.policy_decay_power = 3
+        self.max_search_time = 100
 
         # Using a solver is a kind of cheating!
-        self.use_solver_turn = 50
+        self.use_solver_turn = 0
         self.use_solver_turn_in_simulation = 50
 
         #

@@ -1,19 +1,17 @@
+import asyncio
+import time
 from _asyncio import Future
 from asyncio.queues import Queue
 from collections import defaultdict, namedtuple
 from logging import getLogger
-import asyncio
 
 import numpy as np
 from numpy.random import random
 
-from reversi_zero.agent.api import ReversiModelAPI
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import ReversiEnv, Player, Winner, another_player
-from reversi_zero.lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
-# from reversi_zero.lib.reversi_solver import ReversiSolver
-from reversi_zero.lib.alt.reversi_solver import ReversiSolver
-
+from ..agent.api import ReversiModelAPI
+from ..config import Config
+from ..env.reversi_env import ReversiEnv, Player, Winner, another_player
+from ..lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
 
 CounterKey = namedtuple("CounterKey", "black white next_player")
 QueueItem = namedtuple("QueueItem", "state future")
@@ -57,7 +55,7 @@ class ReversiPlayer:
         self.thinking_history = {}  # for fun
         self.resigned = False
         self.requested_stop_thinking = False
-        self.solver = self.create_solver()
+        # self.solver = self.create_solver()
 
     @staticmethod
     def create_mtcs_info():
@@ -101,33 +99,35 @@ class ReversiPlayer:
             ret = self.action_by_searching(key)
             if ret:  # not save move as play data
                 return ret
-
+        start = time.time()
         for tl in range(self.play_config.thinking_loop):
             if env.turn > 0:
                 self.search_moves(own, enemy)
             else:
                 self.bypass_first_move(key)
-
+            logger.debug(f"expanded size:{len(self.expanded)}")
             policy = self.calc_policy(own, enemy)
             action = int(np.random.choice(range(64), p=policy))
-            action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0)*100))
+            action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0) * 100))
             value_diff = self.var_q(key)[action] - self.var_q(key)[action_by_value]
 
             if env.turn <= pc.start_rethinking_turn or self.requested_stop_thinking or \
                     (value_diff > -0.01 and self.var_n[key][action] >= pc.required_visit_to_decide_action):
                 break
+        print(f'Total time:{time.time()-start}')
 
         # this is for play_gui, not necessary when training.
         self.update_thinking_history(own, enemy, action, policy)
 
-        if self.play_config.resign_threshold is not None and\
-                        np.max(self.var_q(key) - (self.var_n[key] == 0)*10) <= self.play_config.resign_threshold:
+        if self.play_config.resign_threshold is not None and \
+                np.max(self.var_q(key) - (self.var_n[key] == 0) * 10) <= self.play_config.resign_threshold:
             self.resigned = True
             if self.enable_resign:
                 if env.turn >= self.config.play.allowed_resign_turn:
                     return ActionWithEvaluation(None, 0, 0)  # means resign
                 else:
-                    logger.debug(f"Want to resign but disallowed turn {env.turn} < {self.config.play.allowed_resign_turn}")
+                    logger.debug(
+                        f"Want to resign but disallowed turn {env.turn} < {self.config.play.allowed_resign_turn}")
 
         saved_policy = self.calc_policy_by_tau_1(key) if self.config.play_data.save_policy_of_tau_1 else policy
         self.add_data_to_move_buffer_with_8_symmetries(own, enemy, saved_policy)
@@ -176,7 +176,7 @@ class ReversiPlayer:
                         own_saved = rotate90(own_saved)
                         enemy_saved = rotate90(enemy_saved)
                     policy_saved = np.rot90(policy_saved, k=-rot_right)
-                self.moves.append([(own_saved, enemy_saved), list(policy_saved.reshape((64, )))])
+                self.moves.append([(own_saved, enemy_saved), list(policy_saved.reshape((64,)))])
 
     def get_next_key(self, own, enemy, action):
         env = ReversiEnv().update(own, enemy, Player.black)
@@ -223,7 +223,7 @@ class ReversiPlayer:
         :param is_root_node:
         :return:
         """
-        if env.done:
+        if env.done:  # 打完了
             if env.winner == Winner.black:
                 return 1
             elif env.winner == Winner.white:
@@ -234,47 +234,33 @@ class ReversiPlayer:
         key = self.counter_key(env)
         another_side_key = self.another_side_counter_key(env)
 
-        if self.config.play.use_solver_turn_in_simulation and \
-                env.turn >= self.config.play.use_solver_turn_in_simulation:
-            action, score = self.solver.solve(key.black, key.white, Player(key.next_player), exactly=False)
-            if action:
-                score = score if env.next_player == Player.black else -score
-                leaf_v = np.sign(score)
-                leaf_p = np.zeros(64)
-                leaf_p[action] = 1
-                self.var_n[key][action] += 1
-                self.var_w[key][action] += leaf_v
-                self.var_p[key] = leaf_p
-                self.var_n[another_side_key][action] += 1
-                self.var_w[another_side_key][action] -= leaf_v
-                self.var_p[another_side_key] = leaf_p
-                return np.sign(score)
-        #等待所有线程搜索完毕
         while key in self.now_expanding:
             await asyncio.sleep(self.config.play.wait_for_expanding_sleep_sec)
 
-        # is leaf?
+        # 是叶子节点的话探索并评价
         if key not in self.expanded:  # reach leaf node
             leaf_v = await self.expand_and_evaluate(env)
             if env.next_player == Player.black:
                 return leaf_v  # Value for black
             else:
                 return -leaf_v  # Value for white == -Value for black
-
-        virtual_loss = self.config.play.virtual_loss
-        virtual_loss_for_w = virtual_loss if env.next_player == Player.black else -virtual_loss
+        # 当前节点不是leaf
+        # virtual_loss = self.config.play.virtual_loss
+        # virtual_loss_for_w = virtual_loss if env.next_player == Player.black else -virtual_loss
 
         action_t = self.select_action_q_and_u(env, is_root_node)
         _, _ = env.step(action_t)
 
-        self.var_n[key][action_t] += virtual_loss
-        self.var_w[key][action_t] -= virtual_loss_for_w
+        # self.var_n[key][action_t] += virtual_loss
+        # self.var_w[key][action_t] -= virtual_loss_for_w
         leaf_v = await self.search_my_move(env)  # next move
 
         # on returning search path
         # update: N, W
-        self.var_n[key][action_t] += - virtual_loss + 1
-        self.var_w[key][action_t] += virtual_loss_for_w + leaf_v
+        # self.var_n[key][action_t] += - virtual_loss + 1
+        # self.var_w[key][action_t] += virtual_loss_for_w + leaf_v
+        self.var_n[key][action_t] += 1
+        self.var_w[key][action_t] += leaf_v
         # update another side info(flip color and player)
         self.var_n[another_side_key][action_t] += 1
         self.var_w[another_side_key][action_t] -= leaf_v  # must flip the sign.
@@ -309,7 +295,7 @@ class ReversiPlayer:
         state = [black_ary, white_ary] if env.next_player == Player.black else [white_ary, black_ary]
         future = await self.predict(np.array(state))  # type: Future
         await future
-        leaf_p, leaf_v = future.result()
+        leaf_p, leaf_v = future.result()  # 都是NN算出来的
 
         # reverse rotate and flip about leaf_p
         if rotate_right_num > 0 or is_flip_vertical:  # reverse rotation and flip. rot -> flip.
@@ -318,9 +304,9 @@ class ReversiPlayer:
                 leaf_p = np.rot90(leaf_p, k=rotate_right_num)  # rot90: rotate matrix LEFT k times
             if is_flip_vertical:
                 leaf_p = np.flipud(leaf_p)
-            leaf_p = leaf_p.reshape((64, ))
+            leaf_p = leaf_p.reshape((64,))
 
-        self.var_p[key] = leaf_p  # P is value for next_player (black or white)
+        self.var_p[key] = leaf_p  # P is policy
         self.var_p[another_side_key] = leaf_p
         self.expanded.add(key)
         self.now_expanding.remove(key)
@@ -341,10 +327,10 @@ class ReversiPlayer:
                 await asyncio.sleep(self.config.play.prediction_worker_sleep_sec)
                 continue
             item_list = [q.get_nowait() for _ in range(q.qsize())]  # type: list[QueueItem]
-            logger.debug(f"predicting {len(item_list)} items")
+            # logger.debug(f"predicting {len(item_list)} items")
             data = np.array([x.state for x in item_list])
             policy_ary, value_ary = self.api.predict(data)  # shape=(N, 2, 8, 8)
-            logger.debug(f"predicted {len(item_list)} items")
+            # logger.debug(f"predicted {len(item_list)} items")
             for p, v, item in zip(policy_ary, value_ary, item_list):
                 item.future.set_result((p, v))
 
@@ -392,7 +378,6 @@ class ReversiPlayer:
     def another_side_counter_key(env: ReversiEnv):
         return CounterKey(env.board.white, env.board.black, another_player(env.next_player).value)
 
-
     def select_action_q_and_u(self, env, is_root_node):
         key = self.counter_key(env)
         if env.next_player == Player.black:
@@ -409,7 +394,7 @@ class ReversiPlayer:
         if np.sum(p_) > 0:
             # decay policy gradually in the end phase
             _pc = self.config.play
-            temperature = min(np.exp(1-np.power(env.turn/_pc.policy_decay_turn, _pc.policy_decay_power)), 1)
+            temperature = min(np.exp(1 - np.power(env.turn / _pc.policy_decay_turn, _pc.policy_decay_power)), 1)
             # normalize and decay policy
             p_ = self.normalize(p_, temperature)
 
@@ -432,7 +417,3 @@ class ReversiPlayer:
     def normalize(p, t=1):
         pp = np.power(p, t)
         return pp / np.sum(pp)
-
-    def create_solver(self):
-        return ReversiSolver()
-

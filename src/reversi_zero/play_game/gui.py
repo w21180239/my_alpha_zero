@@ -5,7 +5,6 @@ import reversi_zero.env.reversi_env as reversiEnv
 from reversi_zero.play_game.game_model import PlayWithHuman, GameEvent
 from reversi_zero.lib.bitboard import board_to_string
 
-
 logger = getLogger(__name__)
 
 

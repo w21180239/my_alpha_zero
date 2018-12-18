@@ -1,8 +1,7 @@
 import enum
-
 from logging import getLogger
 
-from reversi_zero.lib.bitboard import board_to_string, calc_flip, bit_count, find_correct_moves
+from ..lib.bitboard import board_to_string, calc_flip, bit_count, find_correct_moves
 
 logger = getLogger(__name__)
 # noinspection PyArgumentList

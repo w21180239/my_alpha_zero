@@ -3,13 +3,13 @@ from logging import getLogger
 from random import random
 from time import sleep
 
-from reversi_zero.agent.model import ReversiModel
-from reversi_zero.agent.player import ReversiPlayer
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import ReversiEnv, Player, Winner
-from reversi_zero.lib import tf_util
-from reversi_zero.lib.data_helper import get_next_generation_model_dirs
-from reversi_zero.lib.model_helpler import save_as_best_model, load_best_model_weight
+from ..agent.model import ReversiModel
+from ..agent.player_serial import ReversiPlayer
+from ..config import Config
+from ..env.reversi_env import ReversiEnv, Player, Winner
+from ..lib import tf_util
+from ..lib.data_helper import get_next_generation_model_dirs
+from ..lib.model_helpler import save_as_best_model, load_best_model_weight
 
 logger = getLogger(__name__)
 

@@ -1,9 +1,8 @@
 import re
 from collections import namedtuple
-
 from datetime import datetime
 
-from reversi_zero.lib.util import parse_ggf_board_to_bitboard
+from ..lib.util import parse_ggf_board_to_bitboard
 
 GGF = namedtuple("GGF", "BO MOVES")
 BO = namedtuple("BO", "board_type, square_cont, color")  # color: {O, *}  (O is white, * is black)

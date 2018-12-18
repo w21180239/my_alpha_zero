@@ -1,13 +1,12 @@
 import enum
 from logging import getLogger
 
-from reversi_zero.agent.player import HistoryItem
-from reversi_zero.agent.player import ReversiPlayer
-from reversi_zero.config import Config
-from reversi_zero.env.reversi_env import Player, ReversiEnv
-from reversi_zero.lib.bitboard import find_correct_moves
-from reversi_zero.lib.model_helpler import load_best_model_weight, reload_newest_next_generation_model_if_changed
-from reversi_zero.play_game.common import load_model
+from ..agent.player_serial import HistoryItem
+from ..agent.player_serial import ReversiPlayer
+from ..config import Config
+from ..env.reversi_env import Player, ReversiEnv
+from ..lib.bitboard import find_correct_moves
+from ..play_game.common import load_model
 
 logger = getLogger(__name__)
 
@@ -102,7 +101,7 @@ class PlayWithHuman:
 
         self.last_history = self.ai.ask_thought_about(own, enemy)
         self.last_evaluation = self.last_history.values[self.last_history.action]
-        logger.debug(f"evaluation by ai={self.last_evaluation}")
+        # logger.debug(f"evaluation by ai={self.last_evaluation}")
 
     def get_state_of_next_player(self):
         if self.next_player == Player.black:
