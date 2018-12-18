@@ -1,5 +1,3 @@
-# many code from http://d.hatena.ne.jp/yatt/20100129/1264791420
-
 from logging import getLogger
 
 import wx

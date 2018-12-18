@@ -16,11 +16,7 @@ logger = getLogger(__name__)
 
 class ReversiModelAPI:
     def __init__(self, config: Config, agent_model):
-        """
 
-        :param config:
-        :param reversi_zero.agent.model.ReversiModel agent_model:
-        """
         self.config = config
         self.agent_model = agent_model
 
@@ -43,13 +39,9 @@ class ReversiModelAPI:
 
 
 class MultiProcessReversiModelAPIServer:
-    # https://github.com/Akababa/Chess-Zero/blob/nohistory/src/chess_zero/agent/api_chess.py
 
     def __init__(self, config: Config):
-        """
 
-        :param config:
-        """
         self.config = config
         self.model = None  # type: ReversiModel
         self.connections = []
@@ -61,7 +53,6 @@ class MultiProcessReversiModelAPIServer:
 
     def start_serve(self):
         self.model = self.load_model()
-        # threading workaround: https://github.com/keras-team/keras/issues/5640
         self.model.model._make_predict_function()
         self.graph = tf.get_default_graph()
 
@@ -124,12 +115,6 @@ class MultiProcessReversiModelAPIServer:
 
 class MultiProcessReversiModelAPIClient(ReversiModelAPI):
     def __init__(self, config: Config, agent_model, conn):
-        """
-
-        :param config:
-        :param reversi_zero.agent.model.ReversiModel agent_model:
-        :param Connection conn:
-        """
         super().__init__(config, agent_model)
         self.connection = conn
 
