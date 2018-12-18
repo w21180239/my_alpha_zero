@@ -42,12 +42,6 @@ class ReversiPlayer:
         self.resigned = False
         self.requested_stop_thinking = False
 
-    @staticmethod
-    def create_mtcs_info():
-        return MCTSInfo(defaultdict(lambda: np.zeros((64,))),
-                        defaultdict(lambda: np.zeros((64,))),
-                        defaultdict(lambda: np.zeros((64,))))
-
     def var_q(self, key):
         return self.var_w[key] / (self.var_n[key] + 1e-5)  # 防止除零
 
@@ -61,10 +55,13 @@ class ReversiPlayer:
         self.callback_in_mtcs = callback_in_mtcs
         pc = self.play_config
 
+
         # 计时
         start = time.time()
         original_expanded_size = len(self.expanded)
         for tl in range(self.play_config.thinking_loop):
+            if pc.enable_max_dic_size:
+                self.limit_size()
             if game.turn > 0:
                 self.search_moves(me, enemy, start, original_expanded_size)
             else:
@@ -284,6 +281,14 @@ class ReversiPlayer:
         action_t = int(np.argmax(v_))
         return action_t
 
+    def limit_size(self):
+        if len(self.var_n) > self.play_config.max_dic_size:
+            self.var_n = self.var_n[-self.play_config.max_dic_size:]
+        if len(self.var_p) > self.play_config.max_dic_size:
+            self.var_p = self.var_p[-self.play_config.max_dic_size:]
+        if len(self.var_w) > self.play_config.max_dic_size:
+            self.var_w = self.var_w[-self.play_config.max_dic_size:]
+
     @staticmethod
     def normalize(p, t=1):
         pp = np.power(p, t)
@@ -296,3 +301,9 @@ class ReversiPlayer:
     @staticmethod
     def another_side_counter_key(env: ReversiEnv):
         return CounterKey(env.board.white, env.board.black, another_player(env.next_player).value)
+
+    @staticmethod
+    def create_mtcs_info():
+        return MCTSInfo(defaultdict(lambda: np.zeros((64,))),
+                        defaultdict(lambda: np.zeros((64,))),
+                        defaultdict(lambda: np.zeros((64,))))

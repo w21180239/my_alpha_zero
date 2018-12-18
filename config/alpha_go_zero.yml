@@ -18,9 +18,9 @@ play_data:
   save_policy_of_tau_1: False
 
 trainer:
-  wait_after_save_model_ratio: 0  # no wait
-  batch_size: 128
-  min_data_size_to_learn: 10000
+  wait_after_save_model_ratio: 1  # no wait
+  batch_size: 32
+  min_data_size_to_learn: 1000
   lr_schedules:
     - [0, 0.01]
     - [100000, 0.001]

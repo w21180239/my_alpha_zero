@@ -150,6 +150,8 @@ class PlayConfig(ConfigBase):
         self.policy_decay_turn = 60  # not used
         self.policy_decay_power = 3
         self.max_search_time = 100
+        self.max_dic_size = 2000
+        self.enable_max_dic_size = True
 
         # Using a solver is a kind of cheating!
         self.use_solver_turn = 0

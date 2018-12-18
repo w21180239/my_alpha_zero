@@ -1,16 +1,15 @@
 import argparse
-
 from logging import getLogger
 
 import yaml
 from moke_config import create_config
 
-from .lib.logger import setup_logger
 from .config import Config
+from .lib.logger import setup_logger
 
 logger = getLogger(__name__)
 
-CMD_LIST = ['self', 'opt', 'eval', 'play_gui', 'nboard']
+CMD_LIST = ['self', 'opt', 'eval', 'play_gui', 'nboard', 'play_console']
 
 
 def create_parser():
@@ -63,3 +62,6 @@ def start():
     elif args.cmd == 'nboard':
         from .play_game import nboard
         return nboard.start(config)
+    elif args.cmd == 'play_console':
+        from .play_game import console
+        return console.start(config)
