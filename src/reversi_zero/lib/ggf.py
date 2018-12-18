@@ -5,16 +5,12 @@ from datetime import datetime
 from ..lib.util import parse_ggf_board_to_bitboard
 
 GGF = namedtuple("GGF", "BO MOVES")
-BO = namedtuple("BO", "board_type, square_cont, color")  # color: {O, *}  (O is white, * is black)
-MOVE = namedtuple("MOVE", "color pos")  # color={B, W} pos: like 'F5'
+BO = namedtuple("BO", "board_type, square_cont, color")
+MOVE = namedtuple("MOVE", "color pos")
 
 
 def parse_ggf(ggf):
-    """https://skatgame.net/mburo/ggsa/ggf
 
-    :param ggf:
-    :rtype: GGF
-    """
     tokens = re.split(r'([a-zA-Z]+\[[^\]]+\])', ggf)
     moves = []
     bo = None
@@ -32,11 +28,7 @@ def parse_ggf(ggf):
 
 
 def convert_move_to_action(move_str: str):
-    """
 
-    :param move_str: A1 -> 0, H8 -> 63
-    :return:
-    """
     if move_str[:2].lower() == "pa":
         return None
     pos = move_str.lower()
@@ -46,11 +38,7 @@ def convert_move_to_action(move_str: str):
 
 
 def convert_action_to_move(action):
-    """
 
-    :param int|None action:
-    :return:
-    """
     if action is None:
         return "PA"
     y = action // 8
@@ -67,16 +55,7 @@ def convert_to_bitboard_and_actions(ggf: GGF):
 
 
 def make_ggf_string(black_name=None, white_name=None, dt=None, moves=None, result=None, think_time_sec=60):
-    """
 
-    :param str black_name:
-    :param str white_name:
-    :param datetime|None dt:
-    :param str|None result:
-    :param list[str] moves:
-    :param int think_time_sec:
-    :return:
-    """
     ggf = '(;GM[Othello]PC[RAZSelf]DT[%(datetime)s]PB[%(black_name)s]PW[%(white_name)s]RE[%(result)s]TI[%(time)s]' \
           'TY[8]BO[8 ---------------------------O*------*O--------------------------- *]%(move_list)s;)'
     dt = dt or datetime.utcnow()
