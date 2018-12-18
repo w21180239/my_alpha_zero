@@ -1,4 +1,4 @@
-# idea from http://eyalarubas.com/python-subproc-nonblock.html
+
 from queue import Queue, Empty
 from threading import Thread
 

@@ -7,19 +7,11 @@ EXTRA_CHR = "*"
 
 def board_to_string(black, white, with_edge=True, extra=None):
     """
+    棋盘:
      0  1  2  3  4  5  6  7
      8  9 10 11 12 13 14 15
     ..
     56 57 58 59 60 61 62 63
-
-    0: Top Left, LSB
-    63: Bottom Right
-
-    :param black: bitboard
-    :param white: bitboard
-    :param with_edge:
-    :param extra: bitboard
-    :return:
     """
     array = ["  "] * 64
     extra = extra or 0
@@ -50,29 +42,26 @@ def board_to_string(black, white, with_edge=True, extra=None):
 
 
 def find_correct_moves(own, enemy):
-    """return legal moves"""
-    left_right_mask = 0x7e7e7e7e7e7e7e7e  # Both most left-right edge are 0, else 1
-    top_bottom_mask = 0x00ffffffffffff00  # Both most top-bottom edge are 0, else 1
+
+    left_right_mask = 0x7e7e7e7e7e7e7e7e
+    top_bottom_mask = 0x00ffffffffffff00
     mask = left_right_mask & top_bottom_mask
     mobility = 0
-    mobility |= search_offset_left(own, enemy, left_right_mask, 1)  # Left
-    mobility |= search_offset_left(own, enemy, mask, 9)  # Left Top
-    mobility |= search_offset_left(own, enemy, top_bottom_mask, 8)  # Top
-    mobility |= search_offset_left(own, enemy, mask, 7)  # Top Right
-    mobility |= search_offset_right(own, enemy, left_right_mask, 1)  # Right
-    mobility |= search_offset_right(own, enemy, mask, 9)  # Bottom Right
-    mobility |= search_offset_right(own, enemy, top_bottom_mask, 8)  # Bottom
-    mobility |= search_offset_right(own, enemy, mask, 7)  # Left bottom
+    mobility |= search_offset_left(own, enemy, left_right_mask, 1)  # 左
+    mobility |= search_offset_left(own, enemy, mask, 9)  # 左上
+    mobility |= search_offset_left(own, enemy, top_bottom_mask, 8)  # 上
+    mobility |= search_offset_left(own, enemy, mask, 7)  # 右上
+    mobility |= search_offset_right(own, enemy, left_right_mask, 1)  # 右
+    mobility |= search_offset_right(own, enemy, mask, 9)  # 右下
+    mobility |= search_offset_right(own, enemy, top_bottom_mask, 8)  # 下
+    mobility |= search_offset_right(own, enemy, mask, 7)  # 左下
     return mobility
 
 
 def calc_flip(pos, own, enemy):
-    """return flip stones of enemy by bitboard when I place stone at pos.
-
-    :param pos: 0~63
-    :param own: bitboard (0=top left, 63=bottom right)
-    :param enemy: bitboard
-    :return: flip stones of enemy when I place stone at pos.
+    """
+    返回翻转的棋子位置
+    位置用数的二进制表示
     """
     assert 0 <= pos <= 63, f"pos={pos}"
     f1 = _calc_flip_half(pos, own, enemy)
@@ -99,8 +88,8 @@ def search_offset_left(own, enemy, mask, offset):
     t |= e & (t >> offset)
     t |= e & (t >> offset)
     t |= e & (t >> offset)
-    t |= e & (t >> offset)  # Up to six stones can be turned at once
-    return blank & (t >> offset)  # Only the blank squares can be started
+    t |= e & (t >> offset)
+    return blank & (t >> offset)
 
 
 def search_offset_right(own, enemy, mask, offset):
@@ -111,8 +100,8 @@ def search_offset_right(own, enemy, mask, offset):
     t |= e & (t << offset)
     t |= e & (t << offset)
     t |= e & (t << offset)
-    t |= e & (t << offset)  # Up to six stones can be turned at once
-    return blank & (t << offset)  # Only the blank squares can be started
+    t |= e & (t << offset)
+    return blank & (t << offset)
 
 
 def flip_vertical(x):
@@ -133,7 +122,7 @@ def bit_count(x):
 
 
 def bit_to_array(x, size):
-    """bit_to_array(0b0010, 4) -> array([0, 1, 0, 0])"""
+    """将数字的二进制转为棋盘"""
     return np.array(list(reversed((("0" * size) + bin(x)[2:])[-size:])), dtype=np.uint8)
 
 
