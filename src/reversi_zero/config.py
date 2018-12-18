@@ -146,6 +146,8 @@ class PlayConfig(ConfigBase):
         self.policy_decay_turn = 60
         self.policy_decay_power = 3
         self.max_search_time = 100
+        self.max_dic_size = 2000
+        self.enable_max_dic_size = True
 
 
         self.use_solver_turn = 0

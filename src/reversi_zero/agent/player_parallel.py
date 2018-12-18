@@ -67,29 +67,12 @@ class ReversiPlayer:
         return self.var_w[key] / (self.var_n[key] + 1e-5)
 
     def action(self, own, enemy, callback_in_mtcs=None):
-        """
 
-        :param own: BitBoard
-        :param enemy:  BitBoard
-        :param CallbackInMCTS callback_in_mtcs:
-        :return action=move pos=0 ~ 63 (0=top left, 7 top right, 63 bottom right)
-        """
         action_with_eval = self.action_with_evaluation(own, enemy, callback_in_mtcs=callback_in_mtcs)
         return action_with_eval.action
 
     def action_with_evaluation(self, own, enemy, callback_in_mtcs=None):
-        """
 
-        :param own: BitBoard
-        :param enemy:  BitBoard
-        :param CallbackInMCTS callback_in_mtcs:
-        :rtype: ActionWithEvaluation
-        :return ActionWithEvaluation(
-                    action=move pos=0 ~ 63 (0=top left, 7 top right, 63 bottom right),
-                    n=N of the action,
-                    q=W/N of the action,
-                )
-        """
         env = ReversiEnv().update(own, enemy, Player.black)
         key = self.counter_key(env)
         self.callback_in_mtcs = callback_in_mtcs
@@ -215,14 +198,7 @@ class ReversiPlayer:
             return leaf_v
 
     async def search_my_move(self, env: ReversiEnv, is_root_node=False):
-        """
 
-        Q, V is value for this Player(always black).
-        P is value for the player of next_player (black or white)
-        :param env:
-        :param is_root_node:
-        :return:
-        """
         if env.done:  # 打完了
             if env.winner == Winner.black:
                 return 1
@@ -267,13 +243,7 @@ class ReversiPlayer:
         return leaf_v
 
     async def expand_and_evaluate(self, env):
-        """expand new leaf
 
-        update var_p, return leaf_v
-
-        :param ReversiEnv env:
-        :return: leaf_v
-        """
 
         key = self.counter_key(env)
         another_side_key = self.another_side_counter_key(env)
@@ -313,11 +283,7 @@ class ReversiPlayer:
         return float(leaf_v)
 
     async def prediction_worker(self):
-        """For better performance, queueing prediction requests and predict together in this worker.
 
-        speed up about 45sec -> 15sec for example.
-        :return:
-        """
         q = self.prediction_queue
         margin = 10  # avoid finishing before other searches starting.
         while self.running_simulation_num > 0 or margin > 0:
@@ -341,21 +307,12 @@ class ReversiPlayer:
         return future
 
     def finish_game(self, z):
-        """
 
-        :param z: win=1, lose=-1, draw=0
-        :return:
-        """
         for move in self.moves:  # add this game winner result to all past moves.
             move += [z]
 
     def calc_policy(self, own, enemy):
-        """calc π(a|s0)
 
-        :param own:
-        :param enemy:
-        :return:
-        """
         pc = self.play_config
         env = ReversiEnv().update(own, enemy, Player.black)
         key = self.counter_key(env)
