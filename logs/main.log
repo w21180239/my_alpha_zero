@@ -1,0 +1,471 @@
+2018-12-18 10:30:29,462@reversi_zero.manager INFO # config type: default
+2018-12-18 10:30:36,985@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 10:30:36,985@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 10:30:37,718@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:30:43,051@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:30:45,272@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 10:30:45,272@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 10:30:57,435@reversi_zero.play_game.game_model DEBUG # evaluation by ai=-0.03760138735342098
+2018-12-18 10:31:50,668@reversi_zero.manager INFO # config type: default
+2018-12-18 10:31:57,586@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 10:31:57,587@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 10:31:58,255@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:32:03,614@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:32:05,893@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 10:32:05,893@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 10:32:20,512@reversi_zero.play_game.game_model DEBUG # evaluation by ai=-0.08784740757053847
+2018-12-18 10:35:04,497@reversi_zero.manager INFO # config type: default
+2018-12-18 10:35:12,028@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 10:35:12,028@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 10:35:12,730@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:35:17,854@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 10:35:20,057@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 10:35:20,096@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 10:35:33,047@reversi_zero.play_game.game_model DEBUG # evaluation by ai=-0.10709519354900314
+2018-12-18 10:35:41,218@reversi_zero.play_game.game_model DEBUG # evaluation by ai=0.39293900929961595
+2018-12-18 23:12:47,708@reversi_zero.manager INFO # config type: default
+2018-12-18 23:12:52,849@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:12:52,849@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:12:53,364@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:12:57,709@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:12:59,536@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:12:59,536@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:13:28,020@reversi_zero.manager INFO # config type: default
+2018-12-18 23:13:32,270@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:13:32,270@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:13:32,645@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:13:35,568@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:13:36,692@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:13:36,692@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:16:09,068@reversi_zero.manager INFO # config type: default
+2018-12-18 23:17:17,348@reversi_zero.manager INFO # config type: default
+2018-12-18 23:17:21,301@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:17:21,301@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:17:21,676@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:17:24,521@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:17:25,723@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:17:25,723@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:27:37,341@reversi_zero.manager INFO # config type: default
+2018-12-18 23:27:41,028@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:27:41,028@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:27:41,420@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:27:44,245@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:27:45,555@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:27:45,555@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:28:13,732@reversi_zero.manager INFO # config type: default
+2018-12-18 23:28:17,592@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:28:17,592@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:28:17,936@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:28:20,702@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:28:21,851@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:28:21,851@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:29:16,358@reversi_zero.manager INFO # config type: default
+2018-12-18 23:29:21,710@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:29:21,710@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:29:22,326@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:29:26,858@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:29:28,514@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:29:28,530@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:30:11,294@reversi_zero.manager INFO # config type: default
+2018-12-18 23:30:15,089@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:30:15,089@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:30:15,444@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:30:18,216@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:30:19,497@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:30:19,497@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:31:54,161@reversi_zero.manager INFO # config type: default
+2018-12-18 23:31:57,835@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:31:57,835@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:31:58,201@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:32:01,093@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:32:02,261@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:32:02,277@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:32:54,950@reversi_zero.manager INFO # config type: default
+2018-12-18 23:33:01,763@reversi_zero.manager INFO # config type: default
+2018-12-18 23:33:05,437@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:33:05,437@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:33:05,796@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:33:08,577@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:33:09,836@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:33:09,836@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:33:33,414@reversi_zero.manager INFO # config type: default
+2018-12-18 23:33:37,068@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:33:37,068@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:33:37,436@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:33:40,372@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:33:41,623@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:33:41,623@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:34:10,983@reversi_zero.manager INFO # config type: default
+2018-12-18 23:34:14,483@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:34:14,483@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:34:14,826@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:34:17,670@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:34:18,852@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:34:18,852@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:34:34,202@reversi_zero.manager INFO # config type: default
+2018-12-18 23:34:38,905@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:34:38,905@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:34:39,477@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:34:43,811@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:34:45,493@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:34:45,493@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:35:19,311@reversi_zero.manager INFO # config type: default
+2018-12-18 23:35:22,983@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:35:22,983@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:35:23,326@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:35:26,104@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:35:27,507@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:35:27,507@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:35:51,977@reversi_zero.manager INFO # config type: default
+2018-12-18 23:35:55,950@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:35:55,950@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:35:56,358@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:35:59,129@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:36:00,282@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:36:00,282@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:36:32,920@reversi_zero.manager INFO # config type: default
+2018-12-18 23:36:37,065@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:36:37,065@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:36:37,481@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:36:40,419@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:36:41,623@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:36:41,623@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:38:34,981@reversi_zero.manager INFO # config type: default
+2018-12-18 23:38:38,671@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:38:38,671@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:38:39,055@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:38:41,842@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:38:42,977@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:38:42,977@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:39:00,293@reversi_zero.manager INFO # config type: default
+2018-12-18 23:39:03,946@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:39:03,946@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:39:04,322@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:39:06,883@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:39:08,058@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:39:08,058@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:39:49,966@reversi_zero.manager INFO # config type: default
+2018-12-18 23:39:53,911@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:39:53,911@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:39:54,335@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:39:57,508@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:39:58,794@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:39:58,794@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:42:54,998@reversi_zero.manager INFO # config type: default
+2018-12-18 23:42:59,530@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:42:59,530@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:43:00,118@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:43:04,497@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:43:06,235@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:43:06,236@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:43:41,451@reversi_zero.manager INFO # config type: default
+2018-12-18 23:43:45,094@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:43:45,094@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:43:45,430@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:43:48,252@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:43:49,419@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:43:49,419@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:45:03,710@reversi_zero.manager INFO # config type: default
+2018-12-18 23:45:07,271@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:45:07,271@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:45:07,672@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:45:10,544@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:45:11,717@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:45:11,717@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:45:59,732@reversi_zero.manager INFO # config type: default
+2018-12-18 23:46:03,278@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:46:03,278@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:46:03,667@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:46:06,509@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:46:07,732@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:46:07,732@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:52:46,840@reversi_zero.manager INFO # config type: default
+2018-12-18 23:52:51,493@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:52:51,493@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:52:52,247@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:52:57,306@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:52:59,414@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:52:59,415@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:55:23,514@reversi_zero.manager INFO # config type: default
+2018-12-18 23:55:28,221@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:55:28,221@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:55:28,794@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:55:33,211@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:55:34,810@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:55:34,810@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:56:59,080@reversi_zero.manager INFO # config type: default
+2018-12-18 23:57:03,632@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:57:03,632@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:57:04,226@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:57:08,598@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:57:10,174@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:57:10,178@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:58:32,857@reversi_zero.manager INFO # config type: default
+2018-12-18 23:58:43,127@reversi_zero.manager INFO # config type: default
+2018-12-18 23:58:46,935@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:58:46,935@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:58:47,281@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:58:50,357@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:58:51,523@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:58:51,523@asyncio DEBUG # Using selector: SelectSelector
+2018-12-18 23:59:22,997@reversi_zero.manager INFO # config type: default
+2018-12-18 23:59:27,507@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-18 23:59:27,507@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-18 23:59:28,092@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:59:32,468@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-18 23:59:34,065@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-18 23:59:34,065@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:01:23,029@reversi_zero.manager INFO # config type: default
+2018-12-19 00:01:26,989@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:01:26,989@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:01:27,370@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:01:30,440@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:01:31,889@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:01:31,889@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:03:05,917@reversi_zero.manager INFO # config type: default
+2018-12-19 00:03:09,742@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:03:09,742@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:03:10,119@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:03:12,961@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:03:14,248@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:03:14,249@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:03:43,482@reversi_zero.manager INFO # config type: default
+2018-12-19 00:03:47,420@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:03:47,420@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:03:47,826@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:03:50,530@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:03:51,929@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:03:51,929@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:04:07,221@reversi_zero.manager INFO # config type: default
+2018-12-19 00:04:11,277@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:04:11,277@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:04:11,686@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:04:14,514@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:04:15,710@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:04:15,710@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:04:19,763@reversi_zero.env.reversi_env WARNING # Illegal action=0, No Flipped!
+2018-12-19 00:04:19,763@reversi_zero.env.reversi_env WARNING # Illegal action=0, No Flipped!
+2018-12-19 00:04:37,209@reversi_zero.manager INFO # config type: default
+2018-12-19 00:04:41,229@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:04:41,230@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:04:41,608@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:04:44,670@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:04:45,837@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:04:45,837@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:07:33,382@reversi_zero.manager INFO # config type: default
+2018-12-19 00:07:37,888@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:07:37,888@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:07:38,420@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:07:42,759@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:07:44,342@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:07:44,358@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:08:07,934@reversi_zero.manager INFO # config type: default
+2018-12-19 00:08:11,545@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:08:11,545@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:08:11,935@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:08:14,990@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:08:16,203@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:08:16,203@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:12:02,515@reversi_zero.manager INFO # config type: default
+2018-12-19 00:12:06,241@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:12:06,242@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:12:06,601@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:12:09,382@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:12:10,545@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:12:10,545@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:12:24,193@reversi_zero.manager INFO # config type: default
+2018-12-19 00:12:27,743@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:12:27,743@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:12:28,086@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:12:30,852@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:12:32,013@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:12:32,013@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:12:56,701@reversi_zero.manager INFO # config type: default
+2018-12-19 00:13:00,711@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:13:00,711@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:13:01,118@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:13:04,115@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:13:05,280@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:13:05,280@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:17:18,930@reversi_zero.manager INFO # config type: default
+2018-12-19 00:17:23,672@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:17:23,672@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:17:24,336@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:17:28,811@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:17:30,414@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:17:30,414@asyncio DEBUG # Using selector: SelectSelector
+2018-12-19 00:20:07,904@reversi_zero.manager INFO # config type: default
+2018-12-19 00:20:11,670@reversi_zero.lib.model_helpler DEBUG # No next generation model exists.
+2018-12-19 00:20:11,670@reversi_zero.agent.model DEBUG # loading model from D:\PycharmProjects\alpha_zero\data\model\model_best_config.json
+2018-12-19 00:20:12,067@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1247: calling reduce_sum (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:20:14,889@tensorflow WARNING # From C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\backend\tensorflow_backend.py:1264: calling reduce_prod (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+2018-12-19 00:20:16,055@reversi_zero.agent.model DEBUG # loaded model digest = eb6a629a1c2cea3589161a91c9eb94da9888766849f28f8c4d7942bf4ea57bbc
+2018-12-19 00:20:16,071@asyncio DEBUG # Using selector: SelectSelector
