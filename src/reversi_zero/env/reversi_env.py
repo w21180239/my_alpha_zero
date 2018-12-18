@@ -39,11 +39,7 @@ class ReversiEnv:
         return self
 
     def step(self, action):
-        """
 
-        :param int|None action: move pos=0 ~ 63 (0=top left, 7 top right, 63 bottom right), None is resign
-        :return:
-        """
         assert action is None or 0 <= action <= 63, f"Illegal action={action}"
 
         if action is None:
@@ -122,10 +118,7 @@ class ReversiEnv:
 
     @property
     def observation(self):
-        """
 
-        :rtype: Board
-        """
         return self.board
 
 
