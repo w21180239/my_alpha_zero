@@ -1,4 +1,3 @@
-# http://primenumber.hatenadiary.jp/entry/2016/12/26/063226
 import numpy as np
 
 BLACK_CHR = "O"
@@ -22,31 +21,31 @@ def board_to_string(black, white, with_edge=True, extra=None):
     :param extra: bitboard
     :return:
     """
-    array = [" "] * 64
+    array = ["  "] * 64
     extra = extra or 0
     for i in range(64):
         if black & 1:
-            array[i] = BLACK_CHR
+            array[i] = BLACK_CHR + " "
         elif white & 1:
-            array[i] = WHITE_CHR
+            array[i] = WHITE_CHR + " "
         elif extra & 1:
-            array[i] = EXTRA_CHR
+            array[i] = EXTRA_CHR + " "
         black >>= 1
         white >>= 1
         extra >>= 1
 
     ret = ""
     if with_edge:
-        ret = "#" * 10 + "\n"
+        ret = "# 0 1 2 3 4 5 6 7 #" + "\n"
     for y in range(8):
         if with_edge:
-            ret += "#"
+            ret += str(y) + " "
         ret += "".join(array[y * 8:y * 8 + 8])
         if with_edge:
             ret += "#"
         ret += "\n"
     if with_edge:
-        ret += "#" * 10 + "\n"
+        ret += "# " * 10 + "\n"
     return ret
 
 

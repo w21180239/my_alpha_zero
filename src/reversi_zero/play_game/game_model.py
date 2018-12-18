@@ -1,7 +1,6 @@
 import enum
 from logging import getLogger
 
-from ..agent.player_serial import HistoryItem
 from ..agent.player_serial import ReversiPlayer
 from ..config import Config
 from ..env.reversi_env import Player, ReversiEnv
@@ -99,6 +98,7 @@ class PlayWithHuman:
         self.env.step(action)
 
         self.last_history = self.ai.ask_thought_about(own, enemy)
+        # if not self.config.play.enable_flash_mode:
         self.last_evaluation = self.last_history.values[self.last_history.action]
 
 

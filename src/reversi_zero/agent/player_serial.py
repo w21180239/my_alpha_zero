@@ -46,7 +46,17 @@ class ReversiPlayer:
         return self.var_w[key] / (self.var_n[key] + 1e-5)  # 防止除零
 
     def action(self, own, enemy, callback_in_mtcs=None):
+        if self.config.play.enable_flash_mode:
+            game = ReversiEnv().update(own, enemy, Player.black)
+            black, white = game.board.black, game.board.white
+            black_ary = bit_to_array(black, 64).reshape((8, 8))
+            white_ary = bit_to_array(white, 64).reshape((8, 8))
+            state = [black_ary, white_ary] if game.next_player == Player.black else [white_ary, black_ary]
+            result = self.predict(np.array(state))
+            self.update_thinking_history(black, white, int(np.argmax(result[0])), result[0])
+            return int(np.argmax(result[0]))
         action_with_eval = self.action_with_evaluation(own, enemy, callback_in_mtcs=callback_in_mtcs)
+
         return action_with_eval.action
 
     def action_with_evaluation(self, me, enemy, callback_in_mtcs=None):
@@ -55,11 +65,10 @@ class ReversiPlayer:
         self.callback_in_mtcs = callback_in_mtcs
         pc = self.play_config
 
-
         # 计时
         start = time.time()
         original_expanded_size = len(self.expanded)
-        for tl in range(self.play_config.thinking_loop):
+        for tl in range(pc.thinking_loop):
             if pc.enable_max_dic_size:
                 self.limit_size()
             if game.turn > 0:
