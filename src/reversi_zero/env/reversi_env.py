@@ -17,10 +17,10 @@ def another_player(player: Player):
 class ReversiEnv:
     def __init__(self):
         self.board = None
-        self.next_player = None  # type: Player
+        self.next_player = None
         self.turn = 0
         self.done = False
-        self.winner = None  # type: Winner
+        self.winner = None
 
     def reset(self):
         self.board = Board()
@@ -39,7 +39,10 @@ class ReversiEnv:
         return self
 
     def step(self, action):
-
+        """
+        落子
+        pos (0, 63)
+        """
         assert action is None or 0 <= action <= 63, f"Illegal action={action}"
 
         if action is None:
@@ -59,11 +62,11 @@ class ReversiEnv:
         self.set_own_and_enemy(own, enemy)
         self.turn += 1
 
-        if bit_count(find_correct_moves(enemy, own)) > 0:  # there are legal moves for enemy.
+        if bit_count(find_correct_moves(enemy, own)) > 0:
             self.change_to_next_player()
-        elif bit_count(find_correct_moves(own, enemy)) > 0:  # there are legal moves for me but enemy.
+        elif bit_count(find_correct_moves(own, enemy)) > 0:
             pass
-        else:  # there is no legal moves for me and enemy.
+        else:
             self._game_over()
 
         return self.board, {}
@@ -118,7 +121,9 @@ class ReversiEnv:
 
     @property
     def observation(self):
-
+        """
+        返回棋盘
+        """
         return self.board
 
 
