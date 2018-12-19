@@ -4,38 +4,23 @@ from time import sleep
 
 import keras.backend as K
 
-
 logger = getLogger(__name__)
 
 
 def load_best_model_weight(model, clear_session=False):
-    """
 
-    :param reversi_zero.agent.model.ReversiModel model:
-    :param bool clear_session:
-    :return:
-    """
     if clear_session:
         K.clear_session()
     return model.load(model.config.resource.model_best_config_path, model.config.resource.model_best_weight_path)
 
 
 def save_as_best_model(model):
-    """
 
-    :param reversi_zero.agent.model.ReversiModel model:
-    :return:
-    """
     return model.save(model.config.resource.model_best_config_path, model.config.resource.model_best_weight_path)
 
 
 def reload_best_model_weight_if_changed(model, clear_session=False):
-    """
 
-    :param reversi_zero.agent.model.ReversiModel model:
-    :param bool clear_session:
-    :return:
-    """
     logger.debug(f"start reload the best model if changed")
     digest = model.fetch_digest(model.config.resource.model_best_weight_path)
     if digest != model.digest:
@@ -46,12 +31,7 @@ def reload_best_model_weight_if_changed(model, clear_session=False):
 
 
 def reload_newest_next_generation_model_if_changed(model, clear_session=False):
-    """
 
-    :param reversi_zero.agent.model.ReversiModel model:
-    :param bool clear_session:
-    :return:
-    """
     from reversi_zero.lib.data_helper import get_next_generation_model_dirs
 
     rc = model.config.resource

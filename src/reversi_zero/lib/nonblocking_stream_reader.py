@@ -1,8 +1,7 @@
-# idea from http://eyalarubas.com/python-subproc-nonblock.html
+from logging import getLogger
 from queue import Queue, Empty
 from threading import Thread
 
-from logging import getLogger
 logger = getLogger(__name__)
 
 

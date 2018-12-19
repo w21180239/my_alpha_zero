@@ -37,11 +37,12 @@ class AIvsHuman:
     def try_move(self):
         if self.model.over:
             return
-        while 1:
-            x = eval(input("请输入x："))
-            y = eval(input("请输入y："))
-            print(x)
-            print(y)
+        while True:
+            print('请输入row col:\n>>', end="")
+            tmp = input()
+            tmp = tmp.split()
+            x = int(tmp[0])
+            y = int(tmp[1])
             if self.model.available(y, x):
                 break
 

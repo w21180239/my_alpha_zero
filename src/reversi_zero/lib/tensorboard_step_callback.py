@@ -1,11 +1,8 @@
-from keras.callbacks import Callback
 import tensorflow as tf
+from keras.callbacks import Callback
 
 
 class TensorBoardStepCallback(Callback):
-    """Tensorboard basic visualizations by step.
-
-    """
 
     def __init__(self, log_dir, logging_per_steps=100, step=0):
         super().__init__()
