@@ -9,7 +9,7 @@ from .lib.logger import setup_logger
 
 logger = getLogger(__name__)
 
-CMD_LIST = ['self', 'opt', 'eval', 'play_console']
+CMD_LIST = ['self', 'opt', 'eval', 'play_console', 'play_gui']
 
 
 def create_parser():
@@ -59,3 +59,6 @@ def start():
     elif args.cmd == 'play_console':
         from .play_game import console
         return console.start(config)
+    elif args.cmd == 'play_gui':
+        from .play_game import gui
+        return gui.start(config)

@@ -148,9 +148,9 @@ class PlayConfig(ConfigBase):
         self.max_search_time = 100
         self.max_dic_size = 2000
         self.enable_max_dic_size = True
-        self.enable_flash_mode = True
+        self.enable_flash_mode = False
 
-        self.use_solver_turn = 0
+        self.use_solver_turn = 1
         self.use_solver_turn_in_simulation = 50
 
 
