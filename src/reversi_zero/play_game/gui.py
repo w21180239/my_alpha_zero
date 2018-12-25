@@ -150,25 +150,3 @@ class Frame(wx.Frame):
                 if c is not None:
                     dc.SetBrush(brushes[c])
                     dc.DrawEllipse(x * px, vy * py, px, py)
-                if self.model.last_history:
-                    q_value = self.model.last_history.values[y * 8 + x]
-                    n_value = self.model.last_history.visit[y * 8 + x]
-                    enemy_q_value = - self.model.last_history.enemy_values[y * 8 + x]
-                    enemy_n_value = self.model.last_history.enemy_visit[y * 8 + x]
-
-                    dc.SetTextForeground(wx.Colour("blue"))
-                    if n_value:
-                        dc.DrawText(f"{int(n_value):d}", x * px + 2, vy * py + 2)
-                    if q_value:
-                        if q_value < 0:
-                            dc.SetTextForeground(wx.Colour("red"))
-                        dc.DrawText(f"{int(q_value*100):d}", x * px + 2, (vy + 1) * py - 16)
-
-                    if self.show_player_evaluation:
-                        dc.SetTextForeground(wx.Colour("purple"))
-                        if enemy_n_value:
-                            dc.DrawText(f"{int(enemy_n_value):2d}", (x + 1) * px - 20, vy * py + 2)
-                        if enemy_q_value:
-                            if enemy_q_value < 0:
-                                dc.SetTextForeground(wx.Colour("orange"))
-                            dc.DrawText(f"{int(enemy_q_value*100):2d}", (x + 1) * px - 24, (vy + 1) * py - 16)

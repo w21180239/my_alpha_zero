@@ -10,7 +10,9 @@ from ..play_game.game_model import PlayWithHuman, GameEvent
 class AIvsHuman:
     def __init__(self, model: PlayWithHuman):
         self.model = model
-        self.new_game(human_is_black=True)
+        choose = eval(input("选择先后手（1为先手，0为后手）:\n>>"))
+        self.new_game(human_is_black=choose)
+        self.role = choose  # 1为黑棋，0为白棋
         self.model.add_observer(self.handle_game_event)
 
     def handle_game_event(self, event):
@@ -28,10 +30,14 @@ class AIvsHuman:
     def ai_move(self):
         print("AI is thinking...")
         action = self.model.move_by_ai()
-        if action:
+        print(action)
+
+        if type(action) != bool:
             ai_x, ai_y = action_to_cor(action)
             print("ai落子x:" + str(ai_x))
             print("ai落子y:" + str(ai_y))
+        else:
+            print("AI被你打的跳步了，帅逼！！！！！")
         self.model.play_next_turn()
 
     def try_move(self):
@@ -79,11 +85,14 @@ def start(config: Config):
     config.play_with_human.update_play_config(config.play)
     reversi_model = PlayWithHuman(config)
     temp = AIvsHuman(reversi_model)
-    MainLoop(temp)  # 自己定义
+    MainLoop(temp)
 
 
 def MainLoop(temp: AIvsHuman):
     num = 0
+    print(board_to_string(temp.model.env.board.white, temp.model.env.board.black))
+    if temp.role == 0:
+        temp.handle_game_event(GameEvent.ai_move)
     while not temp.model.over:
         temp.try_move()
         print("round:" + str(num))

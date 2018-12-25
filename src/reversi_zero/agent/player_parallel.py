@@ -26,13 +26,6 @@ logger = getLogger(__name__)
 
 class ReversiPlayer:
     def __init__(self, config: Config, model, play_config=None, enable_resign=True, mtcs_info=None, api=None):
-        """
-
-        :param config:
-        :param reversi_zero.agent.model.ReversiModel|None model:
-        :param MCTSInfo mtcs_info:
-        :parameter ReversiModelAPI api:
-        """
         self.config = config
         self.model = model
         self.play_config = play_config or self.config.play
@@ -72,6 +65,18 @@ class ReversiPlayer:
         action_with_eval = self.action_with_evaluation(own, enemy, callback_in_mtcs=callback_in_mtcs)
         return action_with_eval.action
 
+    def check_dict_size(self):
+        size = self.config.play.max_dic_size
+        if len(self.var_n.keys()) > size:
+            self.var_n = dict(zip(list(self.var_n.keys())[-size:], list(self.var_n.values())[-size:]))
+            logger.debug(f"limit var_n size to :{len(self.var_n.keys())}")
+        if len(self.var_p.keys()) > size:
+            self.var_p = dict(zip(list(self.var_p.keys())[-size:], list(self.var_p.values())[-size:]))
+            logger.debug(f"limit var_p size to :{len(self.var_p.keys())}")
+        if len(self.var_w.keys()) > size:
+            self.var_w = dict(zip(list(self.var_w.keys())[-size:], list(self.var_w.values())[-size:]))
+            logger.debug(f"limit var_w size to :{len(self.var_w.keys())}")
+
     def action_with_evaluation(self, own, enemy, callback_in_mtcs=None):
 
         env = ReversiEnv().update(own, enemy, Player.black)
@@ -89,7 +94,7 @@ class ReversiPlayer:
                 self.search_moves(own, enemy)
             else:
                 self.bypass_first_move(key)
-            logger.debug(f"expanded size:{len(self.expanded)}")
+            logger.debug(f"Rethink times: {tl}        Expanded size: {len(self.expanded)}")
             policy = self.calc_policy(own, enemy)
             action = int(np.random.choice(range(64), p=policy))
             action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0) * 100))
@@ -98,9 +103,10 @@ class ReversiPlayer:
             if env.turn <= pc.start_rethinking_turn or self.requested_stop_thinking or \
                     (value_diff > -0.01 and self.var_n[key][action] >= pc.required_visit_to_decide_action):
                 break
+            if pc.enable_max_dic_size:
+                self.check_dict_size()
         print(f'Total time:{time.time()-start}')
 
-        # this is for play_gui, not necessary when training.
         self.update_thinking_history(own, enemy, action, policy)
 
         if self.play_config.resign_threshold is not None and \

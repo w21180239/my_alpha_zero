@@ -39,6 +39,7 @@ cdef inline unsigned long long _calc_flip_half(int pos, unsigned long long own, 
         flipped |= (outflank - (outflank != 0)) & mask
     return flipped
 
+
 cdef inline unsigned long long flip_vertical(unsigned long long x):
     k1 = 0x00FF00FF00FF00FF
     k2 = 0x0000FFFF0000FFFF
@@ -46,6 +47,7 @@ cdef inline unsigned long long flip_vertical(unsigned long long x):
     x = ((x >> 16) & k2) | ((x & k2) << 16)
     x = (x >> 32) | (x << 32)
     return x
+
 
 cdef inline unsigned long long flip_diag_a1h8(unsigned long long x):
     k1 = 0x5500550055005500

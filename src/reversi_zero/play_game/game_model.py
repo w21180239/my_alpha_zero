@@ -100,6 +100,7 @@ class PlayWithHuman:
         self.last_history = self.ai.ask_thought_about(own, enemy)
         # if not self.config.play.enable_flash_mode:
         self.last_evaluation = self.last_history.values[self.last_history.action]
+        return action
 
 
     def get_state_of_next_player(self):
