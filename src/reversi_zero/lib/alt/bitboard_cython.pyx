@@ -14,6 +14,7 @@ cpdef unsigned long long find_correct_moves(unsigned long long own, unsigned lon
     mobility |= search_offset_right(own, enemy, mask, 7)  # Left bottom
     return mobility
 
+
 cpdef unsigned long long calc_flip(int pos, unsigned long long own, unsigned long long enemy):
     """return flip stones of enemy by bitboard when I place stone at pos.
 
@@ -26,6 +27,7 @@ cpdef unsigned long long calc_flip(int pos, unsigned long long own, unsigned lon
     f1 = _calc_flip_half(pos, own, enemy)
     f2 = _calc_flip_half(63 - pos, rotate180(own), rotate180(enemy))
     return f1 | rotate180(f2)
+
 
 cdef inline unsigned long long _calc_flip_half(int pos, unsigned long long own, unsigned long long enemy):
     el = [enemy, enemy & 0x7e7e7e7e7e7e7e7e, enemy & 0x7e7e7e7e7e7e7e7e, enemy & 0x7e7e7e7e7e7e7e7e]
@@ -93,3 +95,4 @@ cpdef int bit_count(unsigned long long x):
         ret += x & 1
         x = x >> 1
     return ret
+

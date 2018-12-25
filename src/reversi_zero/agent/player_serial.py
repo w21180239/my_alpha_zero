@@ -75,7 +75,7 @@ class ReversiPlayer:
                 self.search_moves(me, enemy, start, original_expanded_size)
             else:
                 self.bypass_first_move(key)
-            # logger.debug(f'Expanded node list size:{len(self.expanded)}')
+            logger.debug(f'Expanded node list size:{len(self.expanded)}')
             policy = self.calc_policy(me, enemy)
             action = int(np.random.choice(range(64), p=policy))  # 过去走的最多的路：蕴含了NN算出来的信息
             action_by_value = int(np.argmax(self.var_q(key) + (self.var_n[key] > 0) * 100))  # 胜率最高的路

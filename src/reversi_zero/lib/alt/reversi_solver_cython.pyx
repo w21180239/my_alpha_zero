@@ -22,6 +22,7 @@ cdef struct Env:
     int best_score
     int next_search_action
 
+
 # cdef Env create_env(unsigned long long own, unsigned long long enemy, int next_player):
 #     legal_moves = find_correct_moves(own, enemy)
 #     return Env(own, enemy, next_player, legal_moves, 0, -1, best_move=-1, best_score=-100, next_search_action=0)
@@ -125,12 +126,14 @@ cdef class ReversiSolver:
 
         return SolveResult(root_env.best_move, root_env.best_score)
 
+
 cdef int next_action(Env *env):
     for i in range(env.next_search_action, 64):
         if env.legal_moves & (1 << i):
             env.next_search_action = i + 1
             return i
     return -1
+
 
 cdef class EnvStack:
     cdef Env stack[64]

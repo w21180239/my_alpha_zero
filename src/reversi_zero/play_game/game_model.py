@@ -1,7 +1,7 @@
 import enum
 from logging import getLogger
 
-from ..agent.player_serial import ReversiPlayer
+from ..agent.player_parallel import ReversiPlayer
 from ..config import Config
 from ..env.reversi_env import Player, ReversiEnv
 from ..lib.bitboard import find_correct_moves
