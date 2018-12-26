@@ -7,12 +7,13 @@ from logging import getLogger
 
 import numpy as np
 from numpy.random import random
-from reversi_zero.lib.alt.reversi_solver import ReversiSolver
 
 from ..agent.api import ReversiModelAPI
 from ..config import Config
 from ..env.reversi_env import ReversiEnv, Player, Winner, another_player
 from ..lib.bitboard import find_correct_moves, bit_to_array, flip_vertical, rotate90, dirichlet_noise_of_mask
+
+# from reversi_zero.lib.alt.reversi_solver import ReversiSolver
 
 CounterKey = namedtuple("CounterKey", "black white next_player")
 QueueItem = namedtuple("QueueItem", "state future")
@@ -49,7 +50,7 @@ class ReversiPlayer:
         self.thinking_history = {}  # for fun
         self.resigned = False
         self.requested_stop_thinking = False
-        self.solver = self.create_solver()
+        # self.solver = self.create_solver()
 
     @staticmethod
     def create_mtcs_info():
@@ -217,21 +218,21 @@ class ReversiPlayer:
         key = self.counter_key(env)
         another_side_key = self.another_side_counter_key(env)
 
-        if self.config.play.use_solver_turn_in_simulation and \
-                env.turn >= self.config.play.use_solver_turn_in_simulation:
-            action, score = self.solver.solve(key.black, key.white, Player(key.next_player), exactly=False)
-            if action:
-                score = score if env.next_player == Player.black else -score
-                leaf_v = np.sign(score)
-                leaf_p = np.zeros(64)
-                leaf_p[action] = 1
-                self.var_n[key][action] += 1
-                self.var_w[key][action] += leaf_v
-                self.var_p[key] = leaf_p
-                self.var_n[another_side_key][action] += 1
-                self.var_w[another_side_key][action] -= leaf_v
-                self.var_p[another_side_key] = leaf_p
-                return np.sign(score)
+        # if self.config.play.use_solver_turn_in_simulation and \
+        #         env.turn >= self.config.play.use_solver_turn_in_simulation:
+        #     action, score = self.solver.solve(key.black, key.white, Player(key.next_player), exactly=False)
+        #     if action:
+        #         score = score if env.next_player == Player.black else -score
+        #         leaf_v = np.sign(score)
+        #         leaf_p = np.zeros(64)
+        #         leaf_p[action] = 1
+        #         self.var_n[key][action] += 1
+        #         self.var_w[key][action] += leaf_v
+        #         self.var_p[key] = leaf_p
+        #         self.var_n[another_side_key][action] += 1
+        #         self.var_w[another_side_key][action] -= leaf_v
+        #         self.var_p[another_side_key] = leaf_p
+        #         return np.sign(score)
 
         while key in self.now_expanding:
             await asyncio.sleep(self.config.play.wait_for_expanding_sleep_sec)
@@ -349,8 +350,8 @@ class ReversiPlayer:
     def calc_policy_by_tau_1(self, key):
         return self.var_n[key] / np.sum(self.var_n[key])  # tau = 1
 
-    def create_solver(self):
-        return ReversiSolver()
+    # def create_solver(self):
+    #     return ReversiSolver()
 
     @staticmethod
     def counter_key(env: ReversiEnv):

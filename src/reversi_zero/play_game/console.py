@@ -30,7 +30,6 @@ class AIvsHuman:
     def ai_move(self):
         print("AI is thinking...")
         action = self.model.move_by_ai()
-        print(action)
 
         if type(action) != bool:
             ai_x, ai_y = action_to_cor(action)
@@ -69,7 +68,9 @@ class AIvsHuman:
 
     def update_status_bar(self):  # 考虑改个名
         print("current player is " + ["White", "Black"][self.model.next_player == reversiEnv.Player.black])
-
+        if self.model.last_evaluation:
+            print(f"AI Confidence = {self.model.last_evaluation*100:.4f}%")
+        # self.SetStatusText(msg)
     def refresh(self, event):
         self.update_status_bar()
 
@@ -97,5 +98,6 @@ def MainLoop(temp: AIvsHuman):
         temp.try_move()
         print("round:" + str(num))
         print(board_to_string(temp.model.env.board.white, temp.model.env.board.black))
+        temp.update_status_bar()
         num += 1
     print("finish")
