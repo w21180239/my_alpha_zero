@@ -53,7 +53,7 @@ class AIvsHuman:
 
             print("该位置不能下，请重新输入。")
 
-        self.model.move(y, x)  # move的横纵坐标反了
+        self.model.move(y, x)
         print(board_to_string(self.model.env.board.white, self.model.env.board.black))
         self.model.play_next_turn()
 
@@ -66,7 +66,7 @@ class AIvsHuman:
             mes += "winner: %s" % ["black", "white"][black < white]
         print(mes)
 
-    def update_status_bar(self):  # 考虑改个名
+    def update_status_bar(self): 
         print("current player is " + ["White", "Black"][self.model.next_player == reversiEnv.Player.black])
         if self.model.last_evaluation:
             print(f"AI Confidence = {self.model.last_evaluation*100:.4f}%")
