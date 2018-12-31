@@ -59,7 +59,7 @@ class Frame(wx.Frame):
 
     def handle_game_event(self, event):
         if event == GameEvent.update:
-            self.panel.Refresh()
+            self.panel.Refresh()#面板更新
             self.update_status_bar()
             wx.Yield()
         elif event == GameEvent.over:

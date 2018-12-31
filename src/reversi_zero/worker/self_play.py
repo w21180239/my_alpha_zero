@@ -164,11 +164,6 @@ class SelfPlayWorker:
         self.save_play_data(write=local_idx % self.config.play_data.nb_game_in_file == 0)
         self.remove_play_data()
 
-        if self.config.play_data.enable_ggf_data:
-            is_write = local_idx % self.config.play_data.nb_game_in_ggf_file == 0
-            is_write |= local_idx <= 5
-            self.save_ggf_data(write=is_write)
-
         # profiler.disable()
         # profiler.dump_stats(f"profile-worker-{self.worker_index}-{local_idx}")
         return self.env
@@ -192,18 +187,6 @@ class SelfPlayWorker:
         write_game_data_to_file(path, self.buffer)
         self.buffer = []
 
-    def save_ggf_data(self, write=True):
-        self.move_history_buffer.append(self.move_history)
-        if not write:
-            return
-
-        rc = self.config.resource
-        game_id = datetime.now().strftime("%Y%m%d-%H%M%S.%f")
-        path = os.path.join(rc.self_play_ggf_data_dir, rc.ggf_filename_tmpl % game_id)
-        with open(path, "wt") as f:
-            for mh in self.move_history_buffer:
-                f.write(mh.make_ggf_string("RAZ", "RAZ") + "\n")
-        self.move_history_buffer = []
 
     def remove_play_data(self):
         files = get_game_data_filenames(self.config.resource)
@@ -294,5 +277,4 @@ class MoveHistory:
         move = f"{convert_action_to_move(action.action)}/{action.q*10}/{action.n}"
         self.moves.append(move)
 
-    def make_ggf_string(self, black_name=None, white_name=None):
-        return make_ggf_string(black_name=black_name, white_name=white_name, moves=self.moves)
+

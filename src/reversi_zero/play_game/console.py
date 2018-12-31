@@ -66,7 +66,7 @@ class AIvsHuman:
             mes += "winner: %s" % ["black", "white"][black < white]
         print(mes)
 
-    def update_status_bar(self): 
+    def update_status_bar(self):
         print("current player is " + ["White", "Black"][self.model.next_player == reversiEnv.Player.black])
         if self.model.last_evaluation:
             print(f"AI Confidence = {self.model.last_evaluation*100:.4f}%")

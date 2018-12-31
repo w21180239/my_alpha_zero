@@ -116,7 +116,6 @@ class PlayDataConfig(ConfigBase):
         self.nb_game_in_file = 2
         self.max_file_num = 800
         self.save_policy_of_tau_1 = True
-        self.enable_ggf_data = True
         self.nb_game_in_ggf_file = 100
         self.drop_draw_game_rate = 0
 
