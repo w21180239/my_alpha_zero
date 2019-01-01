@@ -131,7 +131,7 @@ class Frame(wx.Frame):
 
         w, h = self.panel.GetSize()
 
-        dc.SetBrush(wx.Brush("#228b22"))
+        dc.SetBrush(wx.Brush(wx.Colour(240, 230, 140)))
         dc.DrawRectangle(0, 0, w, h)
 
         dc.SetBrush(wx.Brush("black"))

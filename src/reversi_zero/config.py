@@ -170,9 +170,8 @@ class TrainerConfig(ConfigBase):
         self.batch_size = 256
         self.min_data_size_to_learn = 100000
         self.epoch_to_checkpoint = 1
-        self.start_total_steps = 0
         self.save_model_steps = 200
-        self.use_tensorboard = True
+        self.use_tensorboard = False
         self.logging_per_steps = 100
         self.delete_self_play_after_number_of_training = 0
         self.lr_schedules = [

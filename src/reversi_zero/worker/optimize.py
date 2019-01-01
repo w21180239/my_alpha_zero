@@ -43,7 +43,7 @@ class OptimizeWorker:
 
     def training(self):
         self.compile_model()
-        total_steps = self.config.trainer.start_total_steps
+        total_steps = 0     #已训练的次数
         save_model_callback = PerStepCallback(self.config.trainer.save_model_steps, self.save_current_model,
                                               self.config.trainer.wait_after_save_model_ratio)
         callbacks = [save_model_callback]  # type: list[Callback]
@@ -67,8 +67,7 @@ class OptimizeWorker:
             total_steps += self.train_epoch(self.config.trainer.epoch_to_checkpoint, callbacks)
             self.count_up_training_count_and_delete_self_play_data_files()
 
-        if tb_callback:  # This code is never reached. But potentially this is required.
-            tb_callback.close()
+
 
     def train_epoch(self, epochs, callbacks):
         tc = self.config.trainer

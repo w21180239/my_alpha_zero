@@ -173,7 +173,7 @@ class SelfPlayWorker:
 
     def save_play_data(self, write=True):
         # drop draw game by drop_draw_game_rate
-        if self.black.moves[0][-1] != 0 or self.config.play_data.drop_draw_game_rate <= np.random.random():
+        if self.black.moves[0][-1] != 0 and self.config.play_data.drop_draw_game_rate <= np.random.random():#丢弃部分和局
             data = self.black.moves + self.white.moves
             self.buffer += data
 
